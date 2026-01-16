@@ -1,0 +1,10 @@
+# This trigger checks if a character is a "Manorial Lord"
+# usage: is_manorial_lord = yes
+is_manorial_lord = {
+	# 1. Must have a domicile (The estate mechanic)
+	has_domicile = yes
+	# 2. That Domicile MUST be a Manor
+	domicile = {
+		domicile_type = manor_domicile
+	}
+}

@@ -1,0 +1,57 @@
+# 1. SERGEANT (Lowborn, Unlanded Knight)
+flavor_knight_sergeant = {
+	type = character
+	priority = 20
+	trigger = {
+		is_knight = yes
+		is_lowborn = yes
+		has_landed_title = no
+	}
+	prefix = "title_sergeant"
+}
+
+# 2. MASTER (Noble/Gentry, Unlanded, Not a Knight)
+# Applies to sons of knights/manorial lords or noble courtiers
+flavor_knight_master = {
+	type = character
+	priority = 25
+	trigger = {
+		is_lowborn = no
+		has_landed_title = no
+		is_knight = no
+		# Exclude landed children, who should use default titles
+		OR = {
+			is_adult = yes
+			is_child_of_ruler = no
+		}
+		# Added combatant eligibility check for Master title
+		can_be_combatant_based_on_gender_trigger = {
+			ARMY_OWNER = scope:liege
+			PROSPECTIVE_COMBATANT = root
+		}
+	}
+	prefix = "title_master"
+}
+
+# 3. SQUIRE (Has Manor, Not Dubbed)
+flavor_manorial_squire = {
+	type = character
+	priority = 30 # Higher than Master
+	trigger = {
+		is_manorial_lord = yes # Checks for the Manor Domicile
+		NOT = { has_trait = trait_dubbed_knight }
+	}
+	prefix = "title_squire"
+}
+
+# 4. SER (Has Manor + Dubbed)
+flavor_manorial_ser = {
+	type = character
+	priority = 40 # High priority
+	trigger = {
+		is_manorial_lord = yes
+		has_trait = trait_dubbed_knight
+		highest_held_title_tier < tier_county # So Counts, Dukes, etc. keep their primary title
+	}
+	prefix = "title_ser_knight"
+}

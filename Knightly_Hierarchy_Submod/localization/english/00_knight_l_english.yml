@@ -1,0 +1,23 @@
+l_english:
+ # Titles
+ title_sergeant: "Sergeant"
+ title_master: "[This.GetGender|E(male:Master,female:Mistress)]"
+ title_squire: "Squire"
+ title_ser_knight: "[This.GetGender|E(male:Ser,female:Dame)]"
+
+ # Trait
+ trait_dubbed_knight: "Knight"
+ trait_dubbed_knight_desc: "Dubbed a knight by their liege, a warrior of recognized skill and status."
+
+ # Interaction
+ dub_squire_interaction: "Dub as Knight"
+ dub_squire_interaction_desc: "Formalize this courtier's rank, granting them the title of Ser and adding to their House's glory."
+ dubbed_my_knight_modifier: "Dubbed me a Knight"
+ request_knighthood_interaction: "Request Knighthood"
+ request_knighthood_interaction_desc: "Request your liege to grant you the honor of knighthood."
+ refused_knighthood_modifier: "Refused Knighthood"
+ desc_refused_knighthood_modifier: "This character refused your request for knighthood, leaving you feeling slighted."
+
+ # House Modifier
+ knightly_house_modifier: "Knights of the Realm"
+ desc_knightly_house_modifier: "This House has a long tradition of providing knights to the Liege. Their children are raised to the sword."

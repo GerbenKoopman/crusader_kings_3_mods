@@ -1,0 +1,13 @@
+# Hook for Child Training
+on_turning_adult = {
+	events = {
+		knight_legacy_events.0001
+	}
+}
+
+# Hook for House Decay
+on_death = {
+	events = {
+		knight_legacy_events.0002
+	}
+}

@@ -1,0 +1,103 @@
+namespace = knight_legacy_events
+
+# EVENT 1: MARTIAL UPBRINGING (Triggered on Adulthood)
+knight_legacy_events.0001 = {
+	type = character_event
+	hidden = yes
+	trigger = {
+		is_lowborn = no
+		# Must be the child of a ruler or a courtier in a ruler's court to avoid firing for everyone
+		exists = liege
+		OR = {
+			# Option A: House has the tradition
+			house = { has_house_modifier = knightly_house_modifier }
+			# Option B: Parent was a Dubbed Knight or a Manorial Lord
+			OR = {
+				father = {
+					OR = {
+						has_trait = trait_dubbed_knight
+						is_manorial_lord = yes
+					}
+				}
+				mother = {
+					OR = {
+						has_trait = trait_dubbed_knight
+						is_manorial_lord = yes
+					}
+				}
+			}
+		}
+	}
+	immediate = {
+		# 50% Chance for good or decent bonus stats
+		random_list = {
+			50 = {
+				add_prowess_skill = 2
+				add_martial_skill = 1
+				add_trait = aspiring_blademaster
+			}
+			50 = {
+				add_prowess_skill = 1
+			}
+		}
+	}
+}
+
+# EVENT 2: DECAY (Triggered on House Head Death)
+knight_legacy_events.0002 = {
+	type = character_event
+	hidden = yes
+	trigger = {
+		# Only trigger for the death of a House Head
+		is_house_head = yes
+		house = {
+			# Only check houses that have the modifier or have service points
+			OR = {
+				has_house_modifier = knightly_house_modifier
+				var:knights_provided_to_liege > 0
+			}
+		}
+	}
+	immediate = {
+		house = {
+			# Decay Point
+			change_variable = {
+				name = knights_provided_to_liege
+				add = -1
+			}
+			# If they have the buff and drop to 0 or below, remove it
+			if = {
+				limit = {
+					has_house_modifier = knightly_house_modifier
+					var:knights_provided_to_liege < 1
+				}
+				remove_house_modifier = knightly_house_modifier
+				# Find the liege to send the notification to. This is tricky.
+				# We send it to the current house_head instead, as the liege context is lost.
+				house_head = { trigger_event = { id = knight_legacy_events.0004 } }
+			}
+		}
+	}
+}
+
+# EVENT 3: House Ascended (Notification)
+knight_legacy_events.0003 = {
+	type = character_event
+	title = "A Warrior House"
+	desc = "House [From.GetHouse.GetName] has proven its worth. Five knights they have given me, and now their name is synonymous with martial excellence."
+	theme = martial
+	option = {
+		name = "Knights of the Realm!"
+	}
+}
+
+# EVENT 4: House Fallen (Notification)
+knight_legacy_events.0004 = {
+	type = character_event
+	title = "Fading Glory"
+	desc = "We have rested on our laurels too long. House [From.GetHouse.GetName] has lost its reputation as a producer of knights."
+	theme = martial
+	option = {
+		name = "A shame."
+	}
+}
