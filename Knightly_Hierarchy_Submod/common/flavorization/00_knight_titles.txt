@@ -10,21 +10,32 @@ flavor_knight_sergeant = {
 	prefix = "title_sergeant"
 }
 
-# 2. MASTER (Noble/Gentry, Unlanded, Not a Knight)
-# Applies to sons of knights/manorial lords or noble courtiers
+# 2. MASTER (Noble/Gentry, Unlanded, Undubbed)
+# Applies to:
+# - Sons of knights/manorial lords
+# - Noble courtiers
+# - Noble Knights who are NOT dubbed and NOT manorial lords
 flavor_knight_master = {
 	type = character
 	priority = 25
 	trigger = {
 		is_lowborn = no
 		has_landed_title = no
-		is_knight = no
+		
+		# REMOVED: is_knight = no 
+		# (This allows them to keep the title while serving in your army)
+
+		# Safety Checks: Ensure they aren't actually higher rank
+		is_manorial_lord = no
+		NOT = { has_trait = trait_dubbed_knight }
+
 		# Exclude landed children, who should use default titles
 		OR = {
 			is_adult = yes
 			is_child_of_ruler = no
 		}
-		# Added combatant eligibility check for Master title
+		
+		# Combat eligibility check
 		can_be_combatant_based_on_gender_trigger = {
 			ARMY_OWNER = scope:liege
 			PROSPECTIVE_COMBATANT = root
@@ -82,12 +93,17 @@ flavor_knight_mistress = {
 	trigger = {
 		is_lowborn = no
 		has_landed_title = no
-		is_knight = no
+		
+		# REMOVED: is_knight = no
+
+		is_manorial_lord = no
+		NOT = { has_trait = trait_dubbed_knight }
+
 		OR = {
 			is_adult = yes
 			is_child_of_ruler = no
 		}
-		# Only applies if she CAN fight (e.g. Shieldmaiden or Equal Faith)
+		
 		can_be_combatant_based_on_gender_trigger = {
 			ARMY_OWNER = scope:liege
 			PROSPECTIVE_COMBATANT = root
