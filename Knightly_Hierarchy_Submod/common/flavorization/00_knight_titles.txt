@@ -51,10 +51,22 @@ flavor_manorial_squire = {
 	trigger = {
 		is_manorial_lord = yes # Checks for the Manor Domicile
 		NOT = { has_trait = trait_dubbed_knight }
-		# CHANGED: Allow Count tier (since the manor is a county), block Dukes
 		highest_held_title_tier < tier_duchy 
 	}
 	prefix = "title_squire"
+}
+
+# 3b. SQUIRE (Female / Lady)
+flavor_manorial_squire_female = {
+	type = character
+	gender = female
+	priority = 30
+	trigger = {
+		is_manorial_lord = yes
+		NOT = { has_trait = trait_dubbed_knight }
+		highest_held_title_tier < tier_duchy 
+	}
+	prefix = "title_squire_female"
 }
 
 # 4. SER (Has Manor + Dubbed)
@@ -64,10 +76,22 @@ flavor_manorial_ser = {
 	trigger = {
 		is_manorial_lord = yes
 		has_trait = trait_dubbed_knight
-		# CHANGED: Allow Count tier, block Dukes
 		highest_held_title_tier < tier_duchy 
 	}
 	prefix = "title_ser_knight"
+}
+
+# 4b. DAME (Female Ser)
+flavor_manorial_dame = {
+	type = character
+	gender = female
+	priority = 40
+	trigger = {
+		is_manorial_lord = yes
+		has_trait = trait_dubbed_knight
+		highest_held_title_tier < tier_duchy 
+	}
+	prefix = "title_dame_knight"
 }
 
 ### FEMALE TITLES ###
@@ -110,30 +134,4 @@ flavor_knight_mistress = {
 		}
 	}
 	prefix = "title_mistress"
-}
-
-# 3. SQUIRE (Female - "Dame-Squire" or just Squire)
-flavor_manorial_squire_female = {
-	type = character
-	gender = female
-	priority = 30
-	trigger = {
-		is_manorial_lord = yes
-		NOT = { has_trait = trait_dubbed_knight }
-		highest_held_title_tier < tier_duchy
-	}
-	prefix = "title_squire_female"
-}
-
-# 4. DAME (Female "Ser" equivalent)
-flavor_manorial_dame = {
-	type = character
-	gender = female
-	priority = 40
-	trigger = {
-		is_manorial_lord = yes
-		has_trait = trait_dubbed_knight
-		highest_held_title_tier < tier_duchy
-	}
-	prefix = "title_dame_knight"
 }

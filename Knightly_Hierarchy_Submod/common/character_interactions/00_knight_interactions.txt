@@ -93,6 +93,16 @@ request_knighthood_interaction = {
 				}
 				has_trait = shieldmaiden
 			}
+
+			# INTEGRATION: Oathbound Mod
+			scope:recipient = {
+				if = {
+					limit = {
+						exists = relation_type:oath_bound
+					}
+					set_relation_oath_bound = scope:actor
+				}
+			}
 		}
 		scope:recipient = {
 			is_ruler = yes

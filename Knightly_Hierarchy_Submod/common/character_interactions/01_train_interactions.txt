@@ -7,6 +7,7 @@ train_master_interaction = {
         scope:recipient = {
             is_courtier_of = scope:actor
             is_adult = yes
+            is_manorial_lord = no
             is_knight = no
             has_landed_title = no
             # Only for "Masters" (Sons of Knights/Manorial Lords)
@@ -38,30 +39,28 @@ train_master_interaction = {
     on_accept = {
         scope:actor = { remove_short_term_gold = 50 }
         scope:recipient = {
-            add_character_flag = { flag = received_training_flag years = 5 }
-            
-            # 70% chance to gain Prowess, 30% for Commander trait
             random_list = {
-                70 = {
-                    add_prowess_skill = 2
-                    send_interface_toast = {
-                        title = "Training Successful"
-                        left_icon = scope:recipient
-                        custom_tooltip = "msg_training_prowess"
-                    }
+                70 = { 
+                    add_prowess_skill = 2 
+                    send_interface_toast = { title = "Training Complete" left_icon = scope:recipient custom_tooltip = "msg_training_prowess" }
                 }
+                # INTEGRATION: Chance to become "Gentry" (Mod 3361162762)
                 30 = {
-                    add_random_commander_trait_effect = yes
-                    send_interface_toast = {
-                        title = "Tactical Training"
-                        left_icon = scope:recipient
-                        custom_tooltip = "msg_training_commander"
+                    trigger = {
+                        # Only if they don't already have it
+                        NOT = { has_trait = gentry } 
+                    }
+                    add_trait = gentry
+                    add_prowess_skill = 1
+                    send_interface_toast = { 
+                        title = "Recognized as Gentry" 
+                        left_icon = scope:recipient 
+                        custom_tooltip = "msg_training_gentry" 
                     }
                 }
             }
         }
     }
-    
     localization = "train_master_interaction"
     auto_accept = yes
 }
