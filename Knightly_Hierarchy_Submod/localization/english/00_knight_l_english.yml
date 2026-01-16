@@ -8,6 +8,15 @@
  title_squire_female: "Squire"
  title_dame_knight: "Dame"
 
+ flavor_knight_sergeant: "$title_sergeant$"
+ flavor_knight_sergeant_female: "$title_sergeant$"
+ flavor_knight_master: "$title_master$"
+ flavor_knight_mistress: "$title_mistress$"
+ flavor_manorial_squire: "$title_squire$"
+ flavor_manorial_squire_female: "$title_squire_female$"
+ flavor_manorial_ser: "$title_ser_knight$"
+ flavor_manorial_dame: "$title_dame_knight$"
+
  # Trait
  trait_dubbed_knight: "Knight"
  trait_dubbed_knight_desc: "Dubbed a knight by their liege, a warrior of recognized skill and status."

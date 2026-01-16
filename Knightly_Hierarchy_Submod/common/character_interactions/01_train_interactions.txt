@@ -9,7 +9,7 @@
             is_adult = yes
             is_manorial_lord = no
             is_knight = no
-            is_landed = yes
+            is_landed = no
             # Only for "Masters" (Sons of Knights/Manorial Lords)
             OR = {
                 father = {
@@ -63,3 +63,4 @@
     }
     auto_accept = yes
 }
+

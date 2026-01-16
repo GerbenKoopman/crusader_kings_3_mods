@@ -1,137 +1,66 @@
-﻿# 1. SERGEANT (Lowborn, Unlanded Knight)
-flavor_knight_sergeant = {
-	type = character
-	priority = 20
-	trigger = {
-		is_knight = yes
-		is_lowborn = yes
-		is_landed = yes
-	}
-	prefix = "title_sergeant"
-}
+﻿# Knight Title Flavorization
+# Note: Complex conditional logic (is_knight, is_lowborn, traits, etc.) cannot be implemented
+# directly in flavorization files. See scripted_triggers/00_knight_triggers.txt for
+# trigger-based knight logic. These flavorizations work based on domicile types and governments.
 
-# 2. MASTER (Noble/Gentry, Unlanded, Undubbed)
-# Applies to:
-# - Sons of knights/manorial lords
-# - Noble courtiers
-# - Noble Knights who are NOT dubbed and NOT manorial lords
-flavor_knight_master = {
-	type = character
-	priority = 25
-	trigger = {
-		is_lowborn = no
-		is_landed = yes
-		
-		# REMOVED: is_knight = no 
-		# (This allows them to keep the title while serving in your army)
-
-		# Safety Checks: Ensure they aren't actually higher rank
-		is_manorial_lord = no
-		NOT = { has_trait = trait_dubbed_knight }
-
-		# Exclude landed children, who should use default titles
-		OR = {
-			is_adult = yes
-			is_child_of_ruler = no
-		}
-		
-		# Combat eligibility check
-		can_be_combatant_based_on_gender_trigger = {
-			ARMY_OWNER = scope:liege
-			PROSPECTIVE_COMBATANT = root
-		}
-	}
-	prefix = "title_master"
-}
-
-# 3. SQUIRE (Has Manor, Not Dubbed)
+# Manor Holder - Male (Squire if undubbed, uses localization logic)
+# For the feudalmanor domicile type from manor mod
 flavor_manorial_squire = {
 	type = character
-	priority = 30 # Higher than Master
-	trigger = {
-		is_manorial_lord = yes # Checks for the Manor Domicile
-		NOT = { has_trait = trait_dubbed_knight }
-		highest_held_title_tier < tier_duchy 
+	gender = male
+	special = domicile
+	domicile_type = feudalmanor
+	priority = 30
+	governments = { manorial_government }
+	
+	flavourization_rules = {
+		top_liege = no
 	}
-	prefix = "title_squire"
 }
 
-# 3b. SQUIRE (Female / Lady)
+# Manor Holder - Female (Squire if undubbed)
 flavor_manorial_squire_female = {
 	type = character
 	gender = female
+	special = domicile
+	domicile_type = feudalmanor
 	priority = 30
-	trigger = {
-		is_manorial_lord = yes
-		NOT = { has_trait = trait_dubbed_knight }
-		highest_held_title_tier < tier_duchy 
+	governments = { manorial_government }
+	
+	flavourization_rules = {
+		top_liege = no
 	}
-	prefix = "title_squire_female"
 }
 
-# 4. SER (Has Manor + Dubbed)
+# Manor Holder with Dubbed Knight trait - Male (Ser)
+# Note: Trait checking requires event/effect logic, not flavorization
+# This is a higher priority entry that can be activated via flag
 flavor_manorial_ser = {
 	type = character
-	priority = 40 # High priority
-	trigger = {
-		is_manorial_lord = yes
-		has_trait = trait_dubbed_knight
-		highest_held_title_tier < tier_duchy 
+	gender = male
+	special = domicile
+	domicile_type = feudalmanor
+	priority = 40
+	governments = { manorial_government }
+	flag = dubbed_knight_flag
+	
+	flavourization_rules = {
+		top_liege = no
 	}
-	prefix = "title_ser_knight"
 }
 
-# 4b. DAME (Female Ser)
+# Manor Holder with Dubbed Knight trait - Female (Dame)
 flavor_manorial_dame = {
 	type = character
 	gender = female
+	special = domicile
+	domicile_type = feudalmanor
 	priority = 40
-	trigger = {
-		is_manorial_lord = yes
-		has_trait = trait_dubbed_knight
-		highest_held_title_tier < tier_duchy 
+	governments = { manorial_government }
+	flag = dubbed_knight_flag
+	
+	flavourization_rules = {
+		top_liege = no
 	}
-	prefix = "title_dame_knight"
 }
 
-### FEMALE TITLES ###
-
-# 1. SERGEANT (Female)
-flavor_knight_sergeant_female = {
-	type = character
-	gender = female
-	priority = 20
-	trigger = {
-		is_knight = yes
-		is_lowborn = yes
-		is_landed = yes
-	}
-	prefix = "title_sergeant"
-}
-
-# 2. MISTRESS (Noble/Gentry, Unlanded, Not a Knight)
-flavor_knight_mistress = {
-	type = character
-	gender = female
-	priority = 25
-	trigger = {
-		is_lowborn = no
-		is_landed = yes
-		
-		# REMOVED: is_knight = no
-
-		is_manorial_lord = no
-		NOT = { has_trait = trait_dubbed_knight }
-
-		OR = {
-			is_adult = yes
-			is_child_of_ruler = no
-		}
-		
-		can_be_combatant_based_on_gender_trigger = {
-			ARMY_OWNER = scope:liege
-			PROSPECTIVE_COMBATANT = root
-		}
-	}
-	prefix = "title_mistress"
-}

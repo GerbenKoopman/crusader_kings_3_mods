@@ -12,7 +12,7 @@
 				AND = {
 					is_lowborn = no
 					is_knight = no
-					is_landed = yes
+					is_landed = no
 				}
 			}
 		}
@@ -151,3 +151,4 @@ request_knighthood_interaction = {
 		}
 	}
 }
+
