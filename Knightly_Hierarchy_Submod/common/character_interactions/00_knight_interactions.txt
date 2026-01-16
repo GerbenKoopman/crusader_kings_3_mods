@@ -1,18 +1,18 @@
-dub_squire_interaction = {
+﻿dub_squire_interaction = {
 	category = interaction_category_vassal
 	icon = "gfx/interface/icons/character_interactions/interaction_knight.dds" # A valid vanilla icon
 
 	is_shown = {
 		scope:actor = { is_ruler = yes }
 		scope:recipient = {
-			is_vassal_or_below = scope:actor
+			is_vassal_or_below_of = scope:actor
 			# Show for Squires and Masters who could be granted a manor and dubbed
 			OR = {
 				is_manorial_lord = yes
 				AND = {
 					is_lowborn = no
 					is_knight = no
-					has_landed_title = no
+					is_landed = yes
 				}
 			}
 		}
@@ -69,7 +69,7 @@ request_knighthood_interaction = {
 
 	is_shown = {
 		scope:actor = {
-			is_vassal_or_below = scope:recipient
+			is_vassal_or_below_of = scope:recipient
 		}
 		scope:recipient = {
 			is_ruler = yes
@@ -89,18 +89,15 @@ request_knighthood_interaction = {
 			OR = {
 				can_be_combatant_based_on_gender_trigger = {
 					ARMY_OWNER = scope:actor
-					PROSPECTIVE_COMBATANT = scope:recipient
 				}
 				has_trait = shieldmaiden
 			}
 
 			# INTEGRATION: Oathbound Mod
 			scope:recipient = {
-				if = {
-					limit = {
-						exists = relation_type:oath_bound
-					}
-					set_relation_oath_bound = scope:actor
+				AND = {
+					exists = set_relation_oathbound
+					set_relation_oathbound = scope:actor
 				}
 			}
 		}

@@ -1,0 +1,10 @@
+﻿# Gratitude for being Dubbed
+dubbed_my_knight_modifier = {
+	opinion = 50
+	years = 50
+}
+
+refused_knighthood_modifier = {
+	opinion = -15
+	years = 5
+}

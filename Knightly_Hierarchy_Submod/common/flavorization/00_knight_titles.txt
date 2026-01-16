@@ -1,11 +1,11 @@
-# 1. SERGEANT (Lowborn, Unlanded Knight)
+﻿# 1. SERGEANT (Lowborn, Unlanded Knight)
 flavor_knight_sergeant = {
 	type = character
 	priority = 20
 	trigger = {
 		is_knight = yes
 		is_lowborn = yes
-		has_landed_title = no
+		is_landed = yes
 	}
 	prefix = "title_sergeant"
 }
@@ -20,7 +20,7 @@ flavor_knight_master = {
 	priority = 25
 	trigger = {
 		is_lowborn = no
-		has_landed_title = no
+		is_landed = yes
 		
 		# REMOVED: is_knight = no 
 		# (This allows them to keep the title while serving in your army)
@@ -104,7 +104,7 @@ flavor_knight_sergeant_female = {
 	trigger = {
 		is_knight = yes
 		is_lowborn = yes
-		has_landed_title = no
+		is_landed = yes
 	}
 	prefix = "title_sergeant"
 }
@@ -116,7 +116,7 @@ flavor_knight_mistress = {
 	priority = 25
 	trigger = {
 		is_lowborn = no
-		has_landed_title = no
+		is_landed = yes
 		
 		# REMOVED: is_knight = no
 

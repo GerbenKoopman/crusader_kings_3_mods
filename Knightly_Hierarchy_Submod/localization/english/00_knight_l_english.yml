@@ -1,9 +1,9 @@
-l_english:
+﻿l_english:
  # Titles
  title_sergeant: "Sergeant"
- title_master: "[This.GetGender|E(male:Master,female:Mistress)]"
+ title_master: "[THIS.GetGender|E(male:Master,female:Mistress)]"
  title_squire: "Squire"
- title_ser_knight: "[This.GetGender|E(male:Ser,female:Dame)]"
+ title_ser_knight: "[THIS.GetGender|E(male:Ser,female:Dame)]"
  title_mistress: "Mistress"
  title_squire_female: "Squire"
  title_dame_knight: "Dame"

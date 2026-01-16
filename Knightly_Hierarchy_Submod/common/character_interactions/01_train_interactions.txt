@@ -1,4 +1,4 @@
-train_master_interaction = {
+﻿train_master_interaction = {
     category = interaction_category_vassal
     icon = "gfx/interface/icons/character_interactions/interaction_prowess.dds"
     
@@ -9,7 +9,7 @@ train_master_interaction = {
             is_adult = yes
             is_manorial_lord = no
             is_knight = no
-            has_landed_title = no
+            is_landed = yes
             # Only for "Masters" (Sons of Knights/Manorial Lords)
             OR = {
                 father = {

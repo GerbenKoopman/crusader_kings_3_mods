@@ -1,13 +1,7 @@
-# The Permanent House Buff
+﻿# The Permanent House Buff
 knightly_house_modifier = {
 	prowess = 2
 	martial = 1
 	monthly_dynasty_prestige = 0.2
 	icon = "gfx/interface/icons/modifiers/modifier_martial_education.dds" # A valid vanilla icon
-}
-
-# Gratitude for being Dubbed
-dubbed_my_knight_modifier = {
-	opinion = 50
-	years = 50
 }

@@ -1,12 +1,10 @@
-# This trigger checks if a character is a "Manorial Lord"
-# usage: is_manorial_lord = yes
-is_manorial_lord = {
+﻿is_manorial_lord = {
 	is_ruler = yes
 	OR = {
 		# Check for the custom Feudal Manor (Mod 3624056113)
 		has_domicile = yes
 		domicile = { 
-			domicile_type = feudalmanor 
+			is_domicile_type = feudalmanor 
 		}
 		
 		# Backup: Check for the Government Type

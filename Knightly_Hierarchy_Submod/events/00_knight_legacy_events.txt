@@ -1,4 +1,4 @@
-namespace = knight_legacy_events
+﻿namespace = knight_legacy_events
 
 # EVENT 1: MARTIAL UPBRINGING (Triggered on Adulthood)
 knight_legacy_events.0001 = {
@@ -28,8 +28,7 @@ knight_legacy_events.0001 = {
 			}
 		}
 		can_be_combatant_based_on_gender_trigger = {
-			ARMY_OWNER = scope:liege # Or root.liege
-			PROSPECTIVE_COMBATANT = root
+			ARMY_OWNER = scope:liege
 		}
 	}
 	immediate = {
@@ -38,7 +37,7 @@ knight_legacy_events.0001 = {
 			50 = {
 				add_prowess_skill = 2
 				add_martial_skill = 1
-				add_trait = aspiring_blademaster
+				add_trait = lifestyle_blademaster
 			}
 			50 = {
 				add_prowess_skill = 1

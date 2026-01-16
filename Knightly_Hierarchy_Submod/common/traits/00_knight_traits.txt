@@ -1,8 +1,7 @@
-trait_dubbed_knight = {
+﻿trait_dubbed_knight = {
 	index = 0
 	icon = "knight"
 	martial = 1
 	prowess = 1
-	renown_gain_mult = 0.05
 	desc = trait_dubbed_knight_desc
 }
