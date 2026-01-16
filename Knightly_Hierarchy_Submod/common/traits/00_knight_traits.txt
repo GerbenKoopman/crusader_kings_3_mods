@@ -1,5 +1,4 @@
 ﻿trait_dubbed_knight = {
-	index = 0
 	icon = "knight"
 	martial = 1
 	prowess = 1

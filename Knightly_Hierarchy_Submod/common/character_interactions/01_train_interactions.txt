@@ -61,6 +61,5 @@
             }
         }
     }
-    localization = "train_master_interaction"
     auto_accept = yes
 }

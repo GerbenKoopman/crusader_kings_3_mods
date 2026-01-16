@@ -3,5 +3,5 @@ knightly_house_modifier = {
 	prowess = 2
 	martial = 1
 	monthly_dynasty_prestige = 0.2
-	icon = "gfx/interface/icons/modifiers/modifier_martial_education.dds" # A valid vanilla icon
+	icon = "gfx/interface/icons/icon_skill_martial.dds" # A valid vanilla icon
 }

@@ -59,8 +59,6 @@
 			}
 		}
 	}
-
-	localization = "dub_squire_interaction"
 }
 
 request_knighthood_interaction = {
@@ -152,6 +150,4 @@ request_knighthood_interaction = {
 			}
 		}
 	}
-
-	localization = "request_knighthood_interaction"
 }
