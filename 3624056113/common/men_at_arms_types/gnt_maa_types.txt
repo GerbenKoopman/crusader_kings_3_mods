@@ -1,0 +1,33 @@
+﻿
+gnt_militia_levy = {
+	type = peasant_militia
+
+	damage = 10
+	toughness = 9
+	pursuit = 0
+	screen = 0
+
+	can_recruit = {
+		government_has_flag = government_is_manorial
+		is_landed = no
+	}
+
+	buy_cost = { gold = 20 }
+	low_maintenance_cost = { gold = 0.15 }
+	high_maintenance_cost = { gold = 0.3 }
+	provision_cost = @provisions_cost_infantry_expensive
+
+	stack = 100
+	ai_quality = {  value = culture_ai_weight_skirmishers }
+
+	allowed_in_hired_troops = no
+	illustration = {
+		trigger = {
+			should_use_asian_maa_graphics = yes
+		}
+		reference = pikemen_militia_asia
+	}
+	illustration = {
+		reference = pikemen_militia
+	}
+}

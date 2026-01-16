@@ -1,0 +1,42 @@
+﻿namespace = gnt_switch_character_event
+
+gnt_switch_character_event.0001 = {
+    type = character_event
+    title =gnt_switch_character_event.0001.t
+    desc = gnt_switch_character_event.0001.d
+    theme = realm 
+    override_background = { reference = terrain }
+
+    right_portrait = {
+		character = scope:recipient
+		animation = happiness
+	}
+    trigger = {
+        is_ai = no
+	}
+    option = { #yes
+		name = gnt_switch_character_event.0001.a
+        set_player_character = scope:recipient
+	}
+    option = { #no
+		name = gnt_switch_character_event.0001.b
+	}
+}
+
+gnt_switch_character_event.0002 = {
+    type = character_event
+    title =gnt_switch_character_event.0002.t
+    desc = gnt_switch_character_event.0002.d
+    theme = realm 
+    override_background = { reference = terrain }
+    right_portrait = {
+		character = root
+		animation = happiness
+	}
+    trigger = {
+        is_ai = no
+	}
+    option = { #confirm
+		name = gnt_switch_character_event.0002.a
+	}
+}

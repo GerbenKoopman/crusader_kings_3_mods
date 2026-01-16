@@ -1,0 +1,245 @@
+﻿# Council and Knight Salaries
+aqoa_council_salaries = {
+	default = aqoa_council_salaries_medium
+	cumulative = no
+	flag = imperial_policy
+
+	aqoa_council_salaries_none = {
+		flag = aqoa_council_salaries_none
+
+		can_keep = {
+			is_landed = yes
+			highest_held_title_tier >= tier_county
+	    }
+
+	    modifier = {
+			councillor_opinion = -15
+			glory_hound_opinion = -15
+			courtly_opinion = -15
+			knight_effectiveness_mult = -0.15
+			monthly_prestige_gain_per_knight_add = -0.04
+			monthly_income_mult = 0.3	#5 councillors x 0.04 = 0.1, avg 5 knights x 0.02 = 0.05
+		}
+
+		pass_cost = {
+			prestige = 50
+		}
+
+		can_pass = {
+			trigger_if = {
+				limit = {
+					is_ruler = yes
+				}
+				custom_description = {
+					subject = root
+					text = "has_councillor_salary_policy_cooldown"
+					NOT = {
+						has_variable = councillor_salary_policy_cooldown
+					}
+				}
+			}
+		}
+
+		on_pass = {
+			# Set regular cooldown.
+			set_variable = {
+				name = councillor_salary_policy_cooldown
+				years = 2
+			}
+		}
+
+		ai_will_do = {
+			value = 0
+		}
+	}
+	
+	aqoa_council_salaries_low = {
+		flag = aqoa_council_salaries_low
+
+		can_keep = {
+			is_landed = yes
+			highest_held_title_tier >= tier_county
+	    }
+
+	    modifier = {
+			councillor_opinion = -10
+			glory_hound_opinion = -10
+			courtly_opinion = -10
+			knight_effectiveness_mult = -0.1
+			monthly_prestige_gain_per_knight_add = -0.02
+			monthly_income_mult = 0.15	#5 councillors x 0.02 = 0.1, avg 5 knights x 0.01 = 0.05
+		}
+
+		pass_cost = {
+			prestige = 50
+		}
+
+		can_pass = {
+			trigger_if = {
+				limit = {
+					is_ruler = yes
+				}
+				custom_description = {
+					subject = root
+					text = "has_councillor_salary_policy_cooldown"
+					NOT = {
+						has_variable = councillor_salary_policy_cooldown
+					}
+				}
+			}
+		}
+
+		on_pass = {
+			# Set regular cooldown.
+			set_variable = {
+				name = councillor_salary_policy_cooldown
+				years = 2
+			}
+		}
+
+		ai_will_do = {
+			value = 0
+		}
+	}
+
+	aqoa_council_salaries_medium = {
+		flag = aqoa_council_salaries_medium
+
+		can_keep = {
+			is_landed = yes
+			highest_held_title_tier >= tier_county
+	    }
+
+	    modifier = {
+		}
+
+		pass_cost = {
+			prestige = 50
+		}
+
+		can_pass = {
+			trigger_if = {
+				limit = {
+					is_ruler = yes
+				}
+				custom_description = {
+					subject = root
+					text = "has_councillor_salary_policy_cooldown"
+					NOT = {
+						has_variable = councillor_salary_policy_cooldown
+					}
+				}
+			}
+		}
+
+		on_pass = {
+			# Set regular cooldown.
+			set_variable = {
+				name = councillor_salary_policy_cooldown
+				years = 2
+			}
+		}
+
+		ai_will_do = {
+			value = 10
+		}
+	}
+	
+	aqoa_council_salaries_high = {
+		flag = aqoa_council_salaries_high
+
+		can_keep = {
+			is_landed = yes
+			highest_held_title_tier >= tier_county
+	    }
+
+	    modifier = {
+			councillor_opinion = 10
+			glory_hound_opinion = 10
+			courtly_opinion = 10
+			knight_effectiveness_mult = 0.1
+			monthly_prestige_gain_per_knight_add = 0.02
+			monthly_income_mult = -0.15 #5 councillors x 0.04 = 0.2, avg 5 knights x 0.02 = 0.1
+		}
+
+		pass_cost = {
+			prestige = 50
+		}
+
+		can_pass = {
+			trigger_if = {
+				limit = {
+					is_ruler = yes
+				}
+				custom_description = {
+					subject = root
+					text = "has_councillor_salary_policy_cooldown"
+					NOT = {
+						has_variable = councillor_salary_policy_cooldown
+					}
+				}
+			}
+		}
+
+		on_pass = {
+			# Set regular cooldown.
+			set_variable = {
+				name = councillor_salary_policy_cooldown
+				years = 2
+			}
+		}
+
+		ai_will_do = {
+			value = 0
+		}
+	}
+	
+	aqoa_council_salaries_generous = {
+		flag = aqoa_council_salaries_generous
+
+		can_keep = {
+			is_landed = yes
+			highest_held_title_tier >= tier_county
+	    }
+
+	    modifier = {
+			councillor_opinion = 15
+			glory_hound_opinion = 15
+			courtly_opinion = 15
+			knight_effectiveness_mult = 0.15
+			monthly_prestige_gain_per_knight_add = 0.04
+			monthly_income_mult = -0.3
+		}
+
+		pass_cost = {
+			prestige = 50
+		}
+
+		can_pass = {
+			trigger_if = {
+				limit = {
+					is_ruler = yes
+				}
+				custom_description = {
+					subject = root
+					text = "has_councillor_salary_policy_cooldown"
+					NOT = {
+						has_variable = councillor_salary_policy_cooldown
+					}
+				}
+			}
+		}
+
+		on_pass = {
+			# Set regular cooldown.
+			set_variable = {
+				name = councillor_salary_policy_cooldown
+				years = 2
+			}
+		}
+
+		ai_will_do = {
+			value = 0
+		}
+	}
+}

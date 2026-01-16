@@ -1,0 +1,1080 @@
+﻿namespace = gnt_yearly_life
+
+#############################################
+gnt_yearly_life.0001 = { #silver
+    type = character_event
+    title = gnt_yearly_life.0001.t
+    desc = gnt_yearly_life.0001.d
+    theme = realm
+
+    trigger = {
+        is_manor_lord = yes
+        is_ai = no
+        is_available_adult = yes
+        is_commanding_army = no
+    }
+
+    left_portrait = {
+        character = scope:the_old_farmer
+        animation = rage
+    }
+
+    right_portrait = {
+        character = scope:the_young_farmer
+        animation = anger
+    }
+
+    immediate = {
+        hidden_effect = {
+            if = {
+				create_character = {
+					location = root.capital_province
+                    faith = capital_province.faith
+                    culture = capital_province.culture
+                    gender = male
+                    dynasty = none
+					save_scope_as = the_young_farmer
+				}
+			}
+            ############################################################
+            if = {
+				create_character = {
+					location = root.capital_province
+                    faith = capital_province.faith
+                    culture = capital_province.culture
+                    age = { 50 70 }
+                    gender = male
+                    dynasty = none
+					save_scope_as = the_old_farmer
+				}
+			}
+        }
+    }
+
+    option = { ##########################give me money
+        name = gnt_yearly_life.0001.a
+        add_short_term_gold = 10
+        stress_impact = {
+			greedy = medium_stress_loss
+            compassionate = minor_stress_gain
+        }
+    }
+
+    option = {#########################i want you
+        name = gnt_yearly_life.0001.b
+        pay_short_term_gold = {
+            target = scope:the_young_farmer
+            gold = 10
+        }
+        add_courtier = scope:the_young_farmer
+        stress_impact = {
+			gregarious = minor_stress_loss
+            generous = minor_stress_loss
+            shy = medium_stress_gain
+            paranoid = medium_stress_gain
+        }
+    }
+
+    option = {############################do your thing
+        name = gnt_yearly_life.0001.c
+        stress_impact = {
+            content = medium_stress_loss
+            ambitious = minor_stress_gain
+        }
+    }
+
+    after = {
+        scope:the_old_farmer = { silent_disappearance_effect = yes }
+		scope:the_young_farmer = {
+			if = {
+				limit = {
+					NOT = { is_courtier_of = root }
+				}
+				silent_disappearance_effect = yes
+			}
+		}
+	}
+}
+
+########################################################################################
+gnt_yearly_life.0002 = { #beast
+    type = character_event
+    title = gnt_yearly_life.0002.t
+    desc = gnt_yearly_life.0002.d
+    theme = realm
+
+    trigger = {
+        is_manor_lord = yes
+        is_ai = no
+        number_of_knights >= 1
+        is_available_adult = yes
+        is_commanding_army = no
+    }
+
+    left_portrait = {
+        character = scope:firstknight
+        animation = idle
+    }
+
+    right_portrait = {
+        character = scope:the_reporter
+        animation = beg
+    }
+    
+    immediate = {
+        hidden_effect = {
+            if = {
+				create_character = {
+					location = root.capital_province
+                    faith = capital_province.faith
+                    culture = capital_province.culture
+                    gender = male
+                    dynasty = none
+					save_scope_as = the_reporter
+				}
+			}
+		    random_knight = { save_scope_as = firstknight }
+            scope:firstknight = { add_character_flag = wear_armor }
+        }
+    }
+
+    option = { ##########################I LL GO
+        name = gnt_yearly_life.0002.a
+        custom_tooltip = gnt_yearly_life.0002.a.desc
+        trigger_event = {
+            id = gnt_yearly_life.0022
+            days = 7
+        }
+        stress_impact = {
+			brave = medium_stress_loss
+            craven = medium_stress_gain
+            lazy = major_stress_gain
+        }
+    }
+
+    option = {#########################YOU GO
+        name = gnt_yearly_life.0002.b
+        scope:firstknight = {
+            add_opinion = {
+				modifier = upset_opinion
+                opinion = -10
+				target = root
+			}
+		    duel = {
+			    skill = prowess
+                value = medium_skill_rating
+			    40 = {
+				    desc = gnt_yearly_life.0002.b.success
+				    compare_modifier = {
+					    value = scope:duel_value
+					    multiplier = 3
+					    min = -49
+				    }
+                    add_prestige = medium_prestige_gain
+                    root = {
+				        send_interface_toast = {
+					        title = gnt_yearly_life.0002.b.success
+					        left_icon = scope:firstknight 
+				        }
+                    }
+			    }
+			    50 = {
+				    desc = gnt_yearly_life.0002.b.wounded
+				    compare_modifier = {
+					    value = scope:duel_value
+					    multiplier = -1.5
+					    min = -49
+				    }
+					increase_wounds_effect = { REASON = fight }
+                    add_prowess_skill = 1
+                    root = {
+				        send_interface_toast = {
+					        title = gnt_yearly_life.0002.b.wounded
+					        left_icon = scope:firstknight 
+				        }
+                    }
+			    }
+                50 = {
+				    desc = gnt_yearly_life.0002.b.died
+				    compare_modifier = {
+					    value = scope:duel_value
+					    multiplier = -3.5
+					    min = -49
+				    }
+                    death = { death_reason = death_bear }
+                    root = {
+				        send_interface_toast = {
+					        title = gnt_yearly_life.0002.b.died
+					        left_icon = scope:firstknight 
+				        }
+                    }
+			    }
+		    }
+        }
+        stress_impact = {
+            brave = major_stress_gain
+            lazy = medium_stress_loss
+        }
+    }
+
+    option = {############################I DONT WANNA GO
+        name = gnt_yearly_life.0002.c
+        stress_impact = {
+            brave = medium_stress_gain
+            craven = minor_stress_loss
+            callous = medium_stress_loss
+            lazy = minor_stress_loss
+        }
+        every_knight = {
+            add_opinion = {
+				modifier = upset_opinion
+                opinion = -15
+				target = root
+			}
+        }
+    }
+
+    after = {
+        scope:the_reporter = { silent_disappearance_effect = yes }
+        scope:firstknight = { remove_character_flag = wear_armor }
+	}
+}
+
+###################################################################################################
+gnt_yearly_life.0022 = { #beast2
+    type = character_event
+    title = gnt_yearly_life.0022.t
+    desc = gnt_yearly_life.0022.d
+    theme = hunting
+    override_background = { reference = terrain }
+
+    left_portrait = {
+        character = scope:firstknight
+        animation = waki_gamae
+        camera = camera_event_crowd
+    }
+
+    right_portrait = {
+        character = scope:comeknight
+        animation = crossbow
+        camera = camera_event_center_pointing_forward
+    }
+
+    immediate = {
+        hidden_effect = {
+            if = {
+				random_knight = {
+                    limit = {
+                        this != scope:firstknight
+                    }
+                    save_scope_as = comeknight
+                }
+			}
+            root = { add_character_flag = wear_armor }
+            scope:firstknight = { add_character_flag = wear_armor }
+            scope:comeknight = { add_character_flag = wear_armor }
+        }
+    }
+
+    option = { ##########################SOLO
+        name = gnt_yearly_life.0022.a
+        skill = prowess
+        add_prestige = medium_prestige_gain
+		duel = {
+			skill = prowess
+            value = medium_skill_rating
+			40 = {
+				desc = gnt_yearly_life.0022.a.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 3.5
+				    min = -49
+				}
+				send_interface_toast = {
+					title = gnt_yearly_life.0022.a.success
+					left_icon = root
+                    add_prestige = medium_prestige_gain
+				}
+                scope:firstknight = {
+                    add_opinion = {
+				        modifier = respect_opinion
+                        opinion = 25
+				        target = root
+			        }
+                }
+                if = {
+                    limit = { exists = scope:comeknight }
+                    scope:comeknight = { 
+                        add_opinion = {
+				            modifier = respect_opinion
+                            opinion = 25
+				            target = root
+			            }
+                    }
+                }
+			}
+			50 = {
+				desc = gnt_yearly_life.0022.a.wounded
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -1.5
+					min = -49
+				}
+				send_interface_toast = {
+					title = gnt_yearly_life.0022.a.wounded
+					left_icon = root
+			        increase_wounds_effect = { REASON = fight }
+                    add_prestige = minor_prestige_gain
+                    add_prowess_skill = 1
+				}
+                scope:firstknight = {
+                    add_opinion = {
+				        modifier = respect_opinion
+                        opinion = 15
+				        target = root
+			        }
+                }
+                if = {
+                    limit = { exists = scope:comeknight }
+                    scope:comeknight = { 
+                        add_opinion = {
+				            modifier = respect_opinion
+                            opinion = 15
+				            target = root
+			            }
+                    }
+                }
+			}
+            50 = {
+				desc = gnt_yearly_life.0022.a.died
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -3.5
+					min = -49
+				}
+				send_interface_toast = {
+					title = gnt_yearly_life.0022.a.died
+					left_icon = root
+                    death = { death_reason = death_bear }
+				}
+			}
+		}
+        stress_impact = {
+            brave = major_stress_loss
+            lazy = medium_stress_gain
+            craven = major_stress_gain
+        }
+    }
+
+    option = {#########################TOGETHER
+        name = gnt_yearly_life.0022.b
+        stress_impact = {
+            brave = minor_stress_loss
+            craven = minor_stress_gain
+        }
+        scope:firstknight = {
+		    progress_towards_friend_effect = {
+			    CHARACTER = root
+			    OPINION = 15
+                REASON = fight_together
+		    }
+        }
+        if = {
+            limit = { exists = scope:comeknight }
+            scope:comeknight = { 
+		        progress_towards_friend_effect = {
+			        CHARACTER = root
+			        OPINION = 15
+                    REASON = fight_together
+		        }
+            }
+        }
+		duel = {
+			skill = prowess
+            value = medium_skill_rating
+			60 = {
+				desc = gnt_yearly_life.0022.b.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 3.5
+				    min = -49
+				}
+				send_interface_toast = {
+					title = gnt_yearly_life.0022.b.success
+					left_icon = root
+		            add_prestige = minor_prestige_gain
+				}
+			}
+			60 = {
+				desc = gnt_yearly_life.0022.b.wounded
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -2.5
+					min = -49
+				}
+				send_interface_toast = {
+					title = gnt_yearly_life.0022.b.wounded
+					left_icon = root
+		            increase_wounds_effect = { REASON = fight }
+				}
+			}
+            20 = {
+				desc = gnt_yearly_life.0022.b.died
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -4.5
+					min = -49
+				}
+				send_interface_toast = {
+					title = gnt_yearly_life.0022.b.died
+					left_icon = root
+		            death = { death_reason = death_bear }
+				}
+			}
+		}
+    }
+
+    option = {############################RUNAWAY
+        name = gnt_yearly_life.0022.c
+        add_prestige = major_prestige_loss
+        stress_impact = {
+            brave = major_stress_gain
+            craven = major_stress_loss
+        }
+        scope:firstknight = {
+            progress_towards_rival_effect = {
+			    CHARACTER = root
+                OPINION = 0
+                REASON = left_me
+            }
+        }
+        if = {
+            limit = { exists = scope:comeknight }
+            scope:comeknight = { 
+                progress_towards_rival_effect = {
+			        CHARACTER = root
+                    OPINION = 0
+                    REASON = left_me
+                }
+            }
+        }
+    }
+    after = {
+        root = { remove_character_flag = wear_armor }
+        scope:firstknight = { remove_character_flag = wear_armor }
+        scope:comeknight = { remove_character_flag = wear_armor }
+	}
+}
+
+
+################################################################################################
+gnt_yearly_life.0003 = { #GAZE
+    type = character_event
+    title = gnt_yearly_life.0003.t
+    desc = gnt_yearly_life.0003.d
+    theme = romance_scheme
+    override_effect_2d = { reference = legend_glow }
+
+    trigger = {
+        is_manor_lord = yes
+        is_ai = no
+        NOT = { has_sexuality = asexual }
+        is_available_adult = yes
+        is_commanding_army = no
+    }
+
+    right_portrait = {
+        character = scope:randomcourtier
+        animation = happiness
+        camera = camera_event_right
+    }
+
+    left_portrait = {
+        character = scope:beauty
+        animation = frontend_right_idle
+        camera = camera_event_left_pointing_back_fov20
+    }
+
+    immediate = {
+        hidden_effect = {
+            if = {
+                limit = { is_attracted_to_women = yes }
+				create_character = {
+					location = root.capital_province
+                    faith = capital_province.faith
+                    culture = capital_province.culture
+                    gender = female
+                    dynasty = none
+                    trait = beauty_good_3
+					save_scope_as = beauty
+				}
+			}
+            if = {
+                limit = { is_attracted_to_men = yes }
+				create_character = {
+					location = root.capital_province
+                    faith = capital_province.faith
+                    culture = capital_province.culture
+                    gender = male
+                    dynasty = none
+                    trait = beauty_good_3
+					save_scope_as = beauty
+				}
+			}
+            random_courtier = {
+                limit = {
+                    AND = {
+                        NOT = { is_close_or_extended_family_of = root }
+                        is_adult = yes
+                    }
+                }
+                save_scope_as = randomcourtier
+            }
+        }
+    }
+
+    option = { #########################################
+        name = gnt_yearly_life.0003.a
+        scope:randomcourtier = {
+            add_opinion = {
+				modifier = upset_opinion
+                opinion = -15
+				target = root
+			}
+        }
+        stress_impact = {
+            impatient = minor_stress_loss
+            shy = major_stress_gain
+            calm = minor_stress_gain
+            gregarious = medium_stress_loss
+            arrogant = medium_stress_gain
+            chaste = minor_stress_gain
+        }
+        add_prestige = minor_prestige_loss
+		duel = {
+			skill = diplomacy
+            target = scope:beauty
+			50 = {
+				desc = gnt_yearly_life.0003.a.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 3.5
+				    min = -49
+				}
+				send_interface_toast = {
+					title = gnt_yearly_life.0003.a.success
+					left_icon = root
+                    right_icon = scope:beauty
+                    add_stress = minor_stress_loss
+				}
+                custom_tooltip = {
+                    text = gnt_yearly_life.0003.a.tt
+                    trigger_event = { id = gnt_yearly_life.0031 }
+                }
+			}
+			50 = {
+				desc = gnt_yearly_life.0003.a.failed
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -2.5
+					min = -49
+				}
+				send_interface_toast = {
+					title = gnt_yearly_life.0003.a.failed
+					left_icon = root
+                    right_icon = scope:beauty
+                    add_diplomacy_skill = 1
+                    add_stress = minor_stress_gain
+				}
+                custom_tooltip = {
+                    text = gnt_yearly_life.0003.a.tt
+                    trigger_event = { id = gnt_yearly_life.0032 }
+                }
+			}
+		}
+    }
+
+    option = { #########################################################
+        name = gnt_yearly_life.0003.b
+        stress_impact = {
+            impatient = minor_stress_gain
+            shy = medium_stress_gain
+            paranoid = medium_stress_gain
+            calm = minor_stress_loss
+            temperate = medium_stress_gain
+            generous = minor_stress_loss
+        }
+        pay_short_term_gold = {
+            target = scope:beauty
+            gold = 10
+        }
+        add_courtier = scope:beauty
+    }
+
+    option = { ###########################################################
+        name = gnt_yearly_life.0003.c
+        stress_impact = {
+            lustful = medium_stress_gain
+            calm = minor_stress_loss
+            chaste = minor_stress_loss
+        }
+        scope:beauty = { silent_disappearance_effect = yes }
+    }
+}
+
+##########################################################################
+gnt_yearly_life.0031 = {
+    type = character_event
+    title = gnt_yearly_life.0003.t
+    desc = gnt_yearly_life.0031.d
+    theme = romance_scheme
+    override_background = bedchamber
+
+    left_portrait = {
+        character = scope:beauty
+        animation = chaplain
+        camera = camera_torso
+    }
+
+    option = { #sex
+        name = gnt_yearly_life.0031.a
+        stress_impact = {
+            lustful = major_stress_loss
+            calm = minor_stress_gain
+            shy = major_stress_gain
+            chaste = major_stress_gain
+        }
+		send_interface_toast = {
+			title = gnt_yearly_life.0031.a
+			left_icon = root
+            right_icon = scope:beauty
+            set_relation_lover = {
+                target = scope:beauty
+
+            }
+            had_sex_with_effect = {
+			    CHARACTER = scope:beauty
+			    PREGNANCY_CHANCE = pregnancy_chance
+		    }
+		}
+    }
+
+    option = { #become lover
+        name = gnt_yearly_life.0031.b
+        stress_impact = {
+            lustful = medium_stress_gain
+            calm = minor_stress_loss
+            shy = medium_stress_gain
+            chaste = medium_stress_gain
+        }
+		send_interface_toast = {
+			title = gnt_yearly_life.0031.b
+			left_icon = root
+            right_icon = scope:beauty
+            set_relation_lover = {
+                target = scope:beauty
+            }
+		}
+    }
+
+    option = { #friends only
+        name = gnt_yearly_life.0031.c
+        stress_impact = {
+            lustful = major_stress_gain
+            gregarious = major_stress_loss
+            shy = medium_stress_gain
+            chaste = minor_stress_loss
+        }
+		send_interface_toast = {
+			title = gnt_yearly_life.0031.c
+			left_icon = root
+            right_icon = scope:beauty
+            set_relation_friend = {
+                target = scope:beauty
+            }
+		}
+    }
+}
+
+###########################################################################
+gnt_yearly_life.0032 = {
+    type = character_event
+    title = gnt_yearly_life.0003.t
+    desc = gnt_yearly_life.0032.d
+    theme = romance_scheme
+
+
+    left_portrait = {
+        character = scope:beauty
+        animation = disapproval
+        camera = camera_torso
+    }
+
+    option = { #fine
+        name = gnt_yearly_life.0032.a
+        add_stress = minor_stress_gain
+        stress_impact = {
+            lustful = major_stress_gain
+            calm = minor_stress_loss
+        }
+        scope:beauty = { silent_disappearance_effect = yes }
+    }
+
+    option = { #DIE
+        name = gnt_yearly_life.0032.b
+        add_stress = medium_stress_gain
+        stress_impact = {
+            calm = major_stress_gain
+            wrathful = major_stress_loss
+            impatient = medium_stress_loss
+            sadistic = major_stress_loss
+            compassionate = major_stress_gain
+            just = major_stress_gain
+        }
+		send_interface_toast = {
+			title = gnt_yearly_life.0032.b
+			left_icon = root
+            right_icon = scope:beauty
+            scope:beauty = {
+                death = {
+                    killer = root
+                    death_reason = death_murder
+                }
+            }
+		}
+    }
+}
+
+gnt_yearly_life.0004 = { ###########################train
+    type = character_event
+    title = gnt_yearly_life.0004.t
+    desc = gnt_yearly_life.0004.d
+    override_background = contest_bg_horseracing
+    theme = martial
+
+    trigger = {
+        is_manor_lord = yes
+        is_ai = no
+        number_of_knights >= 2
+        is_available_adult = yes
+        is_commanding_army = no
+    }
+
+    left_portrait = {
+        character = scope:firstknight
+        animation = marshal_wooden_sword
+        camera = camera_center_large
+    }
+
+    right_portrait = {
+        character = scope:otherknight
+        animation = menacing_wooden_sword
+        camera = camera_event_right
+    }
+
+    immediate = {
+        hidden_effect = {
+            random_knight = { save_scope_as = firstknight }
+			random_knight = {
+                limit = {
+                    this != scope:firstknight
+                }
+                save_scope_as = otherknight
+            }
+            scope:firstknight = { add_character_flag = wear_armor }
+            scope:otherknight = { add_character_flag = wear_armor }
+        }
+    }
+
+    option = { ##########################try
+        name = gnt_yearly_life.0004.a
+        stress_impact = {
+			gregarious = medium_stress_loss
+            brave = minor_stress_loss
+            craven = minor_stress_gain
+        }
+        scope:firstknight = {
+            add_opinion = {
+				modifier = pleased_opinion
+                opinion = 15
+				target = root
+			}
+        }
+		duel = {
+			skill = prowess
+            target = scope:firstknight
+			50 = {
+				desc = gnt_yearly_life.0004.a.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 3.5
+				    min = -49
+				}
+				send_interface_toast = {
+					title = gnt_yearly_life.0004.a.success
+					left_icon = root
+                    right_icon = scope:firstknight
+		            add_prestige = minor_prestige_gain
+				}
+			}
+			50 = {
+				desc = gnt_yearly_life.0004.a.failed
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -2.5
+					min = -49
+				}
+				send_interface_toast = {
+					title = gnt_yearly_life.0004.a.failed
+					left_icon = root
+                    right_icon = scope:firstknight
+                    increase_wounds_effect = { REASON = fight }
+                    add_prestige = minor_prestige_loss
+                    add_prowess_skill = 1
+				}
+			}
+        }
+    }
+
+    option = { ##########################sadistic
+        name = gnt_yearly_life.0004.sa
+        trigger = {
+            OR = {
+                has_trait = sadistic
+                has_trait = brave
+            }
+        }
+        stress_impact = {
+			sadistic = medium_stress_loss
+            brave = medium_stress_loss
+            craven = major_stress_gain
+        }
+		duel = {
+			skill = prowess
+            target = scope:firstknight
+			50 = {
+				desc = gnt_yearly_life.0004.sa.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 3.5
+				    min = -49
+				}
+				send_interface_toast = {
+					title = gnt_yearly_life.0004.sa.success
+					left_icon = root
+                    right_icon = scope:firstknight
+                    add_prestige = medium_prestige_gain
+                    scope:firstknight = { 
+                        increase_wounds_effect = { REASON = fight }
+                    }
+				}
+			}
+			50 = {
+				desc = gnt_yearly_life.0004.sa.wounded
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -1.5
+					min = -49
+				}
+				send_interface_toast = {
+					title = gnt_yearly_life.0004.sa.wounded
+					left_icon = root
+			        increase_wounds_effect = { REASON = fight }
+                    add_prestige = medium_prestige_loss
+                    add_prowess_skill = 2
+				}
+			}
+            50 = {
+				desc = gnt_yearly_life.0004.sa.died
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -3.5
+					min = -49
+				}
+			}
+		}
+    }
+
+    option = { #########################pay for wine
+        name = gnt_yearly_life.0004.b
+        remove_short_term_gold = minor_gold_value
+        stress_impact = {
+            temperate = minor_stress_gain
+            greedy = medium_stress_gain
+			gregarious = minor_stress_loss
+            generous = medium_stress_loss
+        }
+        every_knight = {
+            add_opinion = {
+				modifier = pleased_opinion
+                opinion = 10
+				target = root
+			}
+        }
+    }
+
+    option = { ############################nope
+        name = gnt_yearly_life.0004.c
+        stress_impact = {
+            lazy = minor_stress_loss
+            arrogant = medium_stress_loss
+            gregarious = medium_stress_gain
+        }
+        every_knight = {
+            add_opinion = {
+				modifier = upset_opinion
+                opinion = -10
+				target = root
+			}
+        }
+    }
+
+    after = {
+        scope:firstknight = { remove_character_flag = wear_armor }
+        scope:otherknight = { remove_character_flag = wear_armor }
+	}
+}
+
+#############################################################################################
+gnt_yearly_life.0005 = { #well
+    type = character_event
+    title = gnt_yearly_life.0005.t
+    desc = gnt_yearly_life.0005.d
+    theme = realm
+
+    trigger = {
+        is_manor_lord = yes
+        is_ai = no
+        is_available_adult = yes
+        is_commanding_army = no
+    }
+
+    left_portrait = {
+        character = scope:first_farmer
+        animation = beg
+        camera = camera_event_center_pointing_forward_fov35
+    }
+
+    right_portrait = {
+        character = scope:other_farmer
+        animation = crying
+        camera = camera_event_center_pointing_forward_fov35
+    }
+
+    immediate = {
+        hidden_effect = {
+            if = {
+				create_character = {
+					location = root.capital_province
+                    faith = capital_province.faith
+                    culture = capital_province.culture
+                    gender = male
+                    age = { 16 25 }
+                    dynasty = none
+					save_scope_as = first_farmer
+				}
+			}
+            ############################################################
+            if = {
+				create_character = {
+					location = root.capital_province
+                    faith = capital_province.faith
+                    culture = capital_province.culture
+                    gender = male
+                    age = { 16 25 }
+                    dynasty = none
+					save_scope_as = other_farmer
+				}
+			}
+        }
+    }
+
+    option = { ##########################pay me
+        name = gnt_yearly_life.0005.a
+        add_short_term_gold = 10
+        stress_impact = {
+			greedy = medium_stress_loss
+            compassionate = minor_stress_gain
+            forgiving = minor_stress_gain
+        }
+        scope:first_farmer = { silent_disappearance_effect = yes }
+        scope:other_farmer = { silent_disappearance_effect = yes }
+    }
+
+    option = { ##########################kill
+        name = gnt_yearly_life.0005.sa
+        trigger = {
+            OR = {
+                has_trait = sadistic 
+                has_trait = wrathful
+            }
+        }
+        every_courtier = {
+            limit = {
+                NOT = { has_trait = sadistic }
+            }
+            add_opinion = {
+				modifier = upset_opinion
+                opinion = -15
+				target = root
+			}
+        }
+        every_courtier = {
+            limit = { has_trait = sadistic }
+            add_opinion = {
+				modifier = pleased_opinion
+                opinion = 15
+				target = root
+			}
+        }
+        add_dread = 15
+        stress_impact = {
+            sadistic = major_stress_loss
+            forgiving = major_stress_gain
+            wrathful = major_stress_loss
+            vengeful = medium_stress_loss
+        }
+		send_interface_toast = {
+			title = gnt_yearly_life.0005.sa
+			left_icon = scope:first_farmer
+            right_icon = scope:other_farmer
+            scope:first_farmer = {
+                death = {
+                    killer = root
+                    death_reason = death_execution
+                }
+            }
+            scope:other_farmer = {
+                death = {
+                    killer = root
+                    death_reason = death_execution
+                }
+            }
+		}
+    }
+
+    option = { #########################prison
+        name = gnt_yearly_life.0005.b
+        stress_impact = {
+            compassionate = minor_stress_gain
+            forgiving = minor_stress_gain
+            callous = minor_stress_loss
+        }
+        imprison = { target = scope:first_farmer }
+        imprison = { target = scope:other_farmer }
+    }
+
+    option = { ############################forgive
+        name = gnt_yearly_life.0005.c
+        stress_impact = {
+            lazy = minor_stress_loss
+            compassionate = medium_stress_loss
+            wrathful = medium_stress_gain
+            forgiving = medium_stress_loss
+            vengeful = medium_stress_gain
+            sadistic = medium_stress_gain
+        }
+        scope:first_farmer = { silent_disappearance_effect = yes }
+        scope:other_farmer = { silent_disappearance_effect = yes }
+    }
+}

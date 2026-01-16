@@ -1,0 +1,136 @@
+﻿l_english:
+ 
+ olympia_class_tier:0 "Affluence"
+ 
+ # TIERS
+ olympia_class_tier_prisoner:0 "Prisoner"
+ olympia_class_tier_bottom:0 "Destitute"
+ olympia_class_tier_bottom_ruler:0 "Austere"
+ olympia_class_tier_low:0 "Modest"
+ olympia_class_tier_low_mid:0 "Comfortable"
+ olympia_class_tier_mid:0 "Prosperous"
+ olympia_class_tier_high:0 "Opulent"
+ olympia_class_tier_elite:0 "Magnificent"
+ 
+ #Track
+ trait_track_olympia_class_tier:0 "Affluence Rank"
+ trait_track_olympia_class_tier_desc:0 "Affluence is a measure of material standing, improved by increasing monthly [income|E] or amassing [gold|E].\n\nAffluence is shared through families and close associates. [spouses|E], [close_family|E], and [best_friends|E] share full Affluence, while [extended_family|E], [wards|E], [hostages|E], and [friends|E] benefit from 75% of that rank. This shared standing is severely diminished for [bastards|E], [concubines|E], and the [disinherited|E]."
+ # DESCRIPTIONS
+ trait_olympia_class_tier_desc:0 "Access to resources, essentials, and luxuries are all determined by a character's class and wealth."
+ #Prisoner
+ olympia_class_tier_prisoner_desc:0 "Stone walls and iron bars have replaced [ROOT.Char.GetFirstNamePossessiveNoTooltip] usual comforts. Stripped of dignity and agency, [ROOT.Char.GetSheHe] has been forced to exchange the privileges of [ROOT.Char.GetHerHis] station for the harsh reality of confinement. Here, gold buys neither warmth nor safety."
+ 
+ # Bottom: The "Genteel Poor" / Landless Courtier
+ olympia_class_tier_bottom_desc:0 "Though [ROOT.Char.GetFirstNameNoTooltip] can access the halls of power, [ROOT.Char.GetHerHis] purse is undeniably empty. Dependent on the charity of others to maintain a facade of wealth, [ROOT.Char.GetSheHe] possesses little more than the threadbare clothes on [ROOT.Char.GetHerHis] back and lives in cramped quarters little better than the poor of society."
+ 
+ #Bottom: The Austere Ruler
+ olympia_class_tier_bottom_ruler_desc:0 "Though [ROOT.Char.GetFirstNameNoTooltip] holds the reins of power, [ROOT.Char.GetHerHis] coffers are distressingly bare. Unable to maintain [ROOT.Char.GetHerHis] holdings or adequately reward loyal servants, [ROOT.Char.GetSheHe] rules over a realm as impoverished as its liege. The trappings of authority ring hollow when there is no coin to enforce [ROOT.Char.GetHerHis] will."
+ 
+ # Low: The working courtier / Minor Knight
+ olympia_class_tier_low_desc:0 "[ROOT.Char.GetFirstNamePossessiveNoTooltip] means are limited, but sufficient to maintain dignity. While [ROOT.Char.GetSheHe] cannot afford true luxuries or imported finery, neither does [ROOT.Char.GetSheHe] fear the elements. Frugality is a requirement, not a choice."
+ 
+ # Low-Mid: The established Burgher / Landed Gentry
+ olympia_class_tier_low_mid_desc:0 "A life of relative ease. [ROOT.Char.GetFirstNameNoTooltip] enjoys reliable access to quality goods, personal servants, and respectable quarters. While not wealthy enough to influence great politics with gold alone, [ROOT.Char.GetSheHe] lacks for no essential comfort."
+ 
+ # Mid: The Wealthy Noble
+ olympia_class_tier_mid_desc:0 "[ROOT.Char.GetFirstNamePossessiveNoTooltip] coffers are well-stocked and [ROOT.Char.GetHerHis] reputation is trusted by lenders. Fine silks, imported wines, and private retinues are the norm. [ROOT.Char.GetSheHe|U] can afford to be generous with the resources at [ROOT.Char.GetHerHis] disposal."
+ 
+ # High: The High Lord / Duke
+ olympia_class_tier_high_desc:0 "Great wealth flows through [ROOT.Char.GetFirstNamePossessiveNoTooltip] hands. [ROOT.Char.GetSheHe|U] is surrounded by a level of luxury that makes lesser nobles envious. From heavy jewelry to grand feasts, cost is rarely an obstacle for [ROOT.Char.GetHerHim]."
+ 
+ # Elite: The King / Emperor / Mansa Musa levels
+ olympia_class_tier_elite_desc:0 "[ROOT.Char.GetFirstNameNoTooltip] sits at the pinnacle of material society. With access to vast fortunes, [ROOT.Char.GetSheHe] commands resources that rival the treasuries of neighboring kings and emperors. For [ROOT.Char.GetHerHim], the world is not purchased; it is owned."
+
+ # Bottom: Destitute (The Struggling Vagrant)
+ landless_olympia_class_tier_bottom_desc:0 "The road is a cruel master to the empty purse. [ROOT.Char.GetFirstNameNoTooltip] struggles to keep [ROOT.Char.GetHerHis] camp fed and equipment serviceable. Scavenging and begging have replaced glory, and every broken wheel or rusted blade threatens to end [ROOT.Char.GetHerHis] journey permanently."
+ 
+ # Low: Modest (The Working Mercenary)
+ landless_olympia_class_tier_low_desc:0 "[ROOT.Char.GetFirstNamePossessiveNoTooltip] camp is functional, if sparse. There is no coin for idle luxuries, but the essential supplies for travel and war are accounted for. [ROOT.Char.GetSheHe|U] sleeps on the ground and mends [ROOT.Char.GetHerHis] own gear, prioritizing the next meal over a soft bed."
+ 
+ # Low-Mid: Comfortable (The Successful Captain)
+ landless_olympia_class_tier_low_mid_desc:0 "A successful journey brings its own rewards. [ROOT.Char.GetFirstNameNoTooltip] travels with sturdy mounts and watertight tents. While not drowning in gold, [ROOT.Char.GetSheHe] can afford decent lodgings in town and reliable provisions, ensuring [ROOT.Char.GetHerHis] followers march with full bellies."
+ 
+ # Mid: Prosperous (The Wealthy Commander)
+ landless_olympia_class_tier_mid_desc:0 "[ROOT.Char.GetFirstNamePossessiveNoTooltip] war chest is heavy and [ROOT.Char.GetHerHis] credit is good at every tavern and smithy. With a retinue of supply wagons and high-quality steel, [ROOT.Char.GetSheHe] lives better on the road than many petty lords do in their castles."
+ 
+ # High: Opulent (The Warlord)
+ landless_olympia_class_tier_high_desc:0 "The camp of [ROOT.Char.GetFirstNameNoTooltip] is a moving spectacle of wealth. [ROOT.Char.GetSheHe|U] rests in a grand pavilion furnished with looted silks and purchased finery. [ROOT.Char.GetHerHis] company is lavishly equipped, and this display of fortune serves as a warning as much as a boast."
+ 
+ # Elite: Magnificent (The King without a Crown / Golden Company)
+ landless_olympia_class_tier_elite_desc:0 "[ROOT.Char.GetFirstNameNoTooltip] commands a moving empire. The wealth transported in [ROOT.Char.GetHerHis] train rivals the vaults of static kingdoms. For [ROOT.Char.GetHerHim], the world is not a map of borders, but a series of markets to be bought and battles to be financed without a second thought."
+
+ #Rules
+ game_rule_category_aqoa:0 "A Question of Affluence"
+ rule_aqoa_safety_nets_for_rulers:0 "$game_rule_category_aqoa$: Ruler Base Tiers"
+ rule_aqoa_adjust_income_XP:0 "$game_rule_category_aqoa$: Affluence Points"
+ rule_aqoa_tribal_adjustment_XP:0 "$game_rule_category_aqoa$: Government Adjustments"
+ 
+ setting_aqoa_safety_nets_on:0 "Enabled"
+ setting_aqoa_safety_nets_on_desc:0 "Every landed [ruler|E] receives a base amount of #high 10 Affluence #! for each [rank|e] at [count|E] and above. This stacks with their monthly income and gold reserves."
+ setting_aqoa_safety_nets_half:0 "Half Base Amounts"
+ setting_aqoa_safety_nets_half_desc:0 "Every landed [ruler|E] receives a base amount of #high 5 Affluence#! for each [rank|e] at [count|E] and above. This stacks with their monthly income and gold reserves."
+ setting_aqoa_safety_nets_off:0 "No Ruler Adjustments"
+ setting_aqoa_safety_nets_off_desc:0 "Every [ruler|E] calculates their Affluence based off of their monthly [income|E] and [gold|E] only, and receives no bonuses for being [landed|E]."
+ 
+ setting_aqoa_income_XP_100:0 "Default Setting"
+ setting_aqoa_income_XP_100_desc:0 "When calculating a character's Affluence, every 100 [gold|E] and +1 in [income|E] will increase #high Affluence#! by #high 1.#!"
+ setting_aqoa_income_XP_125:0 "125% of Default Value"
+ setting_aqoa_income_XP_125_desc:0 "When calculating a character's Affluence, every 100 [gold|E] and +1 in [income|E] will increase #high Affluence#! by #high 1.25.#!"
+ setting_aqoa_income_XP_150:0 "150% of Default Value"
+ setting_aqoa_income_XP_150_desc:0 "When calculating a character's Affluence, every 100 [gold|E] and +1 in [income|E] will increase #high Affluence#! by #high 1.5.#!"
+ setting_aqoa_income_XP_175:0 "175% of Default Value"
+ setting_aqoa_income_XP_175_desc:0 "When calculating a character's Affluence, every 100 [gold|E] and +1 in [income|E] will increase #high Affluence#! by #high 1.75.#!"
+ setting_aqoa_income_XP_200:0 "200% of Default Value"
+ setting_aqoa_income_XP_200_desc:0 "When calculating a character's Affluence, every 100 [gold|E] and +1 in [income|E] will increase #high Affluence#! by #high 2.0.#!"
+ setting_aqoa_income_XP_300:0 "300% of Default Value"
+ setting_aqoa_income_XP_300_desc:0 "When calculating a character's Affluence, every 100 [gold|E] and +1 in [income|E] will increase #high Affluence#! by #high 3.0.#!"
+ setting_aqoa_income_XP_75:0 "75% of Default Value"
+ setting_aqoa_income_XP_75_desc:0 "When calculating a character's Affluence, every 100 [gold|E] and +1 in [income|E] will increase #high Affluence#! by #high 0.75.#!"
+ setting_aqoa_income_XP_50:0 "50% of Default Value"
+ setting_aqoa_income_XP_50_desc:0 "When calculating a character's Affluence, every 100 [gold|E] and +1 in [income|E] will increase #high Affluence#! by #high 0.5.#!"
+ setting_aqoa_income_XP_25:0 "25% of Default Value"
+ setting_aqoa_income_XP_25_desc:0 "When calculating a character's Affluence, every 100 [gold|E] and +1 in [income|E] will increase #high Affluence#! by #high 0.25.#!"
+ setting_aqoa_income_XP_10:0 "10% of Default Value"
+ setting_aqoa_income_XP_10_desc:0 "When calculating a character's Affluence, every 100 [gold|E] and +1 in [income|E] will increase #high Affluence#! by #high 0.1.#!"
+ 
+ # 10% (Hardest)
+ setting_aqoa_tribal_10:0 "Harsh (10%)"
+ setting_aqoa_tribal_10_desc:0 "[tribal|E], [nomadic|E], [adventurer|E], and [mercenary|E] characters generate #high Affluence#! at only #high 10%#! efficiency." 
+
+ # 25% 
+ setting_aqoa_tribal_25:0 "Strict (25%)"
+ setting_aqoa_tribal_25_desc:0 "[tribal|E], [nomadic|E], [adventurer|E], and [mercenary|E] characters generate #high Affluence#! at #high 25%#! efficiency." 
+
+ # 33%
+ setting_aqoa_tribal_33:0 "Standard (33%)"
+ setting_aqoa_tribal_33_desc:0 "[tribal|E], [nomadic|E], [adventurer|E], and [mercenary|E] characters generate #high Affluence#! at #high 33%#! efficiency."
+
+ # 50%
+ setting_aqoa_tribal_50:0 "Moderate (50%)"
+ setting_aqoa_tribal_50_desc:0 "[tribal|E], [nomadic|E], [adventurer|E], and [mercenary|E] characters generate #high Affluence#! at #high 50%#! efficiency."
+
+ # 75%
+ setting_aqoa_tribal_75:0 "Lenient (75%)"
+ setting_aqoa_tribal_75_desc:0 "[tribal|E], [nomadic|E], [adventurer|E], and [mercenary|E] characters generate #high Affluence#! at #high 75%#! efficiency."
+
+ # 100%
+ setting_aqoa_tribal_100:0 "Equal (100%)"
+ setting_aqoa_tribal_100_desc:0 "[tribal|E], [nomadic|E], [adventurer|E], and [mercenary|E] characters receive no adjustments to #high Affluence#!."
+ 
+ aqoa_council_salaries:0 "Retainer Wages"
+ aqoa_council_salaries_singular:0 "Retainer Wage Policy"
+ aqoa_council_salaries_none:0 "Duty Without Coin"
+ aqoa_council_salaries_none_effects:0 "• [councillors|E] and $knight_culture_player_plural$ serve without monetary compensation, relying upon the prestige of their office and their liege's favor." 
+ aqoa_council_salaries_low:0 "Modest Stipends"
+ aqoa_council_salaries_low_effects:0 "• [councillors|E] and $knight_culture_player_plural$ receive a small wage for their service, sufficient to maintain their station."
+ aqoa_council_salaries_medium:0 "Fair Wages"
+ aqoa_council_salaries_medium_effects:0 "• [councillors|E] and $knight_culture_player_plural$ are compensated appropriately for their duties to the realm."
+ aqoa_council_salaries_high:0 "Generous Payment"
+ aqoa_council_salaries_high_effects:0 "• [councillors|E] and $knight_culture_player_plural$ receive substantial payment, ensuring their loyalty and contentment."
+ aqoa_council_salaries_generous:0 "Lavish Compensation"
+ aqoa_council_salaries_generous_effects:0 "• [councillors|E] and $knight_culture_player_plural$ are richly rewarded for their service, though such generosity strains the treasury."
+ 
+ aqoa_salary_councillor_received:0 "Annual Councillor Salary Received"
+ aqoa_salary_knight_received:0 "Annual Champion Salary Received"
+ councillor_salary_received_desc:0 ""
+ COUNCILLOR_SALARY_POLICY_IS_ON_COOLDOWN:0 "You recently changed Retainer Wagers. Can be changed again after [GetCurrentDateWithDiff( GetVarTimeRemaining( CHARACTER.MakeScope, 'councillor_salary_policy_cooldown') )]"

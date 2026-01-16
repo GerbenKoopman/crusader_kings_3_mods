@@ -1,0 +1,160 @@
+﻿namespace = ml_war
+
+ml_war.0001 = {
+    type = character_event
+    title = ml_war.0001.t
+    desc = ml_war.0001.d
+    theme = realm
+
+    left_portrait = {
+        character = root
+    }
+
+    right_portrait = {
+        character = scope:your_liege
+    }
+
+    trigger = {
+        exists = liege
+        liege != root
+        is_physically_able = yes
+        is_at_war_with_liege = no
+        OR = {
+            is_ai = yes
+            is_ai = no
+        }
+    }
+
+    immediate = {
+        save_scope_as = you
+        liege = {
+            save_scope_as = your_liege
+
+            every_character_war = {
+                if = {
+                    limit = {
+                        OR = {
+                            primary_attacker = scope:your_liege
+                            primary_defender = scope:your_liege
+                        }
+                        NAND = {
+                            primary_attacker = { is_at_war_with = scope:you }
+                            primary_defender = { is_at_war_with = scope:you }
+                        }
+                    }
+                    save_scope_as = war_to_join
+                }
+            }
+        }
+    }
+
+    option = { ##########################join war
+        name = ml_war.0001.a
+
+        stress_impact = {
+            brave = medium_stress_loss
+            craven = medium_stress_gain
+            lazy = minor_stress_gain
+        }
+        add_prestige = minor_prestige_gain
+        scope:war_to_join = {
+            if = {
+                limit = {
+                    primary_attacker = scope:your_liege
+                }
+                add_attacker = root
+            }
+            else_if = {
+                limit = {
+                    primary_defender = scope:your_liege
+                }
+                add_defender = root
+            }
+        }
+        scope:your_liege = {
+            add_opinion = {
+			    modifier = pleased_opinion
+                opinion = 20
+			    target = root
+		    }
+        }
+
+		ai_chance = {
+			base = 3
+		    modifier = {
+			    add = 7
+                has_trait = brave
+			}
+		    modifier = {
+			    add = 10
+			    OR = {
+					has_secret_relation_lover = scope:your_liege
+					has_relation_lover = scope:your_liege
+					has_relation_soulmate = scope:your_liege
+					has_relation_friend = scope:your_liege
+					has_relation_best_friend = scope:your_liege
+				}
+			}
+		    modifier = {
+			    add = 5
+	            opinion = {
+		            target = scope:your_liege
+		            value >= 15
+                }
+			}
+		    modifier = {
+			    add = 5
+	            opinion = {
+		            target = scope:your_liege
+		            value >= 30
+                }
+			}
+		}
+    }
+
+
+    option = { ###########################forget it
+        name = ml_war.0001.b
+
+        stress_impact = {
+            brave = medium_stress_gain
+            craven = minor_stress_loss
+            lazy = minor_stress_loss
+        }
+
+		ai_chance = {
+			base = 10
+		    modifier = {
+			    add = 7
+                has_trait = craven
+			}
+		    modifier = {
+			    add = 7
+                has_trait = lazy
+			}
+		    modifier = {
+			    add = 10
+                OR = {
+                    has_relation_rival = scope:your_liege
+                    has_relation_grudge = scope:your_liege
+                    has_relation_nemesis = scope:your_liege
+                    has_relation_bully = scope:your_liege
+                }
+            }
+		    modifier = {
+			    add = 5
+	            opinion = {
+		            target = scope:your_liege
+		            value <= 15
+                }
+			}
+		    modifier = {
+			    add = 10
+	            opinion = {
+		            target = scope:your_liege
+		            value < 0
+                }
+			}
+		}
+    }
+}

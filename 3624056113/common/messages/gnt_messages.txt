@@ -1,0 +1,34 @@
+﻿msg_gnt_tax_pay = {
+    icon = "steward_job"
+	title = event_message_title
+	desc = event_message_effect_and_text
+	style = good
+}
+
+msg_gnt_tax_half = {
+    icon = "steward_job"
+	title = event_message_title
+	desc = event_message_effect_and_text
+	style = neutral
+}
+
+msg_gnt_tax_relation = {
+    icon = "steward_job"
+	title = event_message_title
+	desc = event_message_effect_and_text
+	style = neutral
+}
+
+msg_gnt_tax_double = {
+    icon = "steward_job"
+	title = event_message_title
+	desc = event_message_effect_and_text
+	style = good
+}
+
+msg_gnt_tax_no = {
+    icon = "steward_job"
+	title = event_message_title
+	desc = event_message_effect_and_text
+	style = bad
+}

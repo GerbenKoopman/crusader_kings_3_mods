@@ -1,0 +1,17 @@
+﻿acotw_obscured = {
+	
+	shown_in_ruler_designer = no
+	inherit_chance = 100
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_acotw_obscured_desc
+			}
+			desc = trait_acotw_obscured_character_desc
+		}
+	}
+}

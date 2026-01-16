@@ -1,0 +1,15 @@
+﻿oath_keeper_opinion = {
+    opinion = 50  # The opinion boost for the oath relationship
+    decaying = no
+}
+
+oath_holder_opinion = {
+    opinion = 50  # The opinion boost for the recipient of the oath
+	decaying = no
+}
+
+rejected_by_oathholder_opinion = {
+    opinion = -50  # The opinion boost for the recipient of the oath
+    years = 10
+	decaying = no
+}

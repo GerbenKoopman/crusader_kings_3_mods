@@ -1,0 +1,22 @@
+﻿l_english: 
+ rule_nss_coa_rule_cadet_template:0 "#R Bastards and Banners#!: Cadet House CoA"
+ setting_nss_coa_rule_default:0 "Disabled (Vanilla)"
+ setting_nss_coa_rule_default_desc:0 "Coat of Arms will not be modified by this mod."
+ setting_nss_coa_rule_dynasty:0 "Dynasty"
+ setting_nss_coa_rule_dynasty_desc:0 "Coat of Arms will remain the same as the original Dynasty's (aka the founding dynasty banner)"
+ setting_nss_coa_rule_capital:0 "Capital"
+ setting_nss_coa_rule_capital_desc:0 "Coat of Arms will be copied from the Realm Capital. Landless characters will generate a new CoA, Landless adventurers take CoA of camp location barony"
+ setting_nss_coa_rule_new:0 "Random"
+ setting_nss_coa_rule_new_desc:0 "A new, random, culturally-appropriate Coat of Arms will be generated."
+
+
+ rule_nss_bastard_founder_rule:0 "#R Bastards and Banners#!: Bastard Founders"
+ setting_nss_bastard_founder_enabled:0 "Enabled"
+ setting_nss_bastard_founder_enabled_desc:0 "Uses the modded Bastard Founder system including dynasty inheritance logic, cadet branches, and CoA override rule usage."
+ setting_nss_bastard_founder_landed:0 "Landed Only"
+ setting_nss_bastard_founder_landed_desc:0 "Bastard Founders will only create a bastard branch if they own a title. This included adventurer camps, baronies and heads of faith."
+ setting_nss_bastard_founder_disabled:0 "Disabled (Vanilla)"
+ setting_nss_bastard_founder_disabled_desc:0 "Disables all modded bastard founder logic. Bastards simply become Bastard Founders of their own dynasty using the base game's behavior."
+
+
+

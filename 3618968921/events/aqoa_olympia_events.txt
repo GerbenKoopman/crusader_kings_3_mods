@@ -1,0 +1,313 @@
+﻿namespace = olympia_aqoa
+
+olympia_aqoa.1001 = { #One Time Event - Add traits & XP to all starting characters
+	scope = none
+	hidden = yes
+
+	immediate = {
+		every_ruler = {
+			aqoa_calculate_income_rulers = yes
+		}
+	}
+}
+
+#Baby is born, recheck the court
+olympia_aqoa.1002 = {
+    hidden = yes
+	type = character_event
+
+	trigger = {
+		scope:child.liege ?= {
+			NOR = {
+				has_trait = acotw_obscured
+				is_imprisoned = yes
+			}
+		}
+	}
+
+    immediate = {
+		scope:child.liege ?= {
+			aqoa_calculate_income_rulers = yes
+		}
+    }
+}
+
+###############################
+#Annual Affluence XP Adjustment
+###############################
+
+olympia_aqoa.1003 = {
+	hidden = yes
+	type = character_event
+
+	trigger = {
+		is_ruler = yes
+		OR = {
+			is_ai = no	#Players and their courts get a check every year
+			NOT = { has_character_flag = income_check_cooldown }	#Barons get a check every 5 years, Counts 3, Dukes 2, everyone else once a year
+		}
+		NOR = {
+			has_trait = acotw_obscured
+			is_imprisoned = yes			#We don't want to recalculate when the liege is in prison
+		}
+	}
+
+    immediate = {
+		aqoa_calculate_income_rulers = yes
+    }
+}
+
+#Let's give the mercenary leaders some love too
+olympia_aqoa.1004 = {
+	hidden = yes
+	scope = none
+
+    immediate = {
+		
+		every_ruler = {
+			every_hired_mercenary = {
+				mercenary_company_leader = {
+					add_gold = { 10 50 }
+					
+					every_courtier = {
+						add_gold = { 1 10 }
+					}
+				}
+			}
+		}
+		
+		
+    }
+}
+
+#Councillors and Knights need a salary
+olympia_aqoa.1005 = {
+	hidden = yes
+	type = character_event
+
+	trigger = {
+		OR = {
+			is_councillor = yes
+			is_knight = yes
+		}
+	}
+
+    immediate = {
+		
+		liege ?= {
+			save_scope_as = host
+		}
+		
+		#Councillors
+		if = {
+			limit = {
+				is_councillor = yes
+			}
+			set_variable = { name = aqoa_annual_income_councillor 	value = scope:host.var:aqoa_monthly_income }		#Set variable
+		
+			if = {
+				limit = { scope:host = { has_realm_law_flag = aqoa_council_salaries_medium } }
+				
+				#Councillors make 2% of whatever their liege is making on Medium Pay
+				change_variable = {
+					name = aqoa_annual_income_councillor
+					multiply = 0.24		#0.2 x 12 months
+				}
+				
+				send_interface_message = {
+					type = aqoa_salary_councillor_received  # Appears in feed, not banner
+					desc = councillor_salary_received_desc
+					
+					left_icon = scope:host  # Your liege
+					right_icon = root       # You
+					
+					add_gold = var:aqoa_annual_income_councillor
+				}
+			}
+			else_if = {
+				limit = { scope:host = { has_realm_law_flag = aqoa_council_salaries_low } }
+				
+				#Councillors make 1% of whatever their liege is making on Low Pay
+				change_variable = {
+					name = aqoa_annual_income_councillor
+					multiply = 0.12		#0.1 x 12 months
+				}
+				
+				send_interface_message = {
+					type = aqoa_salary_councillor_received  # Appears in feed, not banner
+					desc = councillor_salary_received_desc
+					
+					left_icon = scope:host  # Your liege
+					right_icon = root       # You
+					
+					add_gold = var:aqoa_annual_income_councillor
+				}
+			}
+			else_if = {
+				limit = { scope:host = { has_realm_law_flag = aqoa_council_salaries_none } }
+				
+				#Councillors make 0% of whatever their liege is making on No Pay
+				change_variable = {
+					name = aqoa_annual_income_councillor
+					multiply = 0
+				}
+			}
+			else_if = {
+				limit = { scope:host = { has_realm_law_flag = aqoa_council_salaries_high } }
+				
+				#Councillors make 3% of whatever their liege is making on High Pay
+				change_variable = {
+					name = aqoa_annual_income_councillor
+					multiply = 0.36		#0.03 x 12 = 0.36
+				}
+				
+				send_interface_message = {
+					type = aqoa_salary_councillor_received  # Appears in feed, not banner
+					desc = councillor_salary_received_desc
+					
+					left_icon = scope:host  # Your liege
+					right_icon = root       # You
+					
+					add_gold = var:aqoa_annual_income_councillor
+				}
+			}
+			else_if = {
+				limit = { scope:host = { has_realm_law_flag = aqoa_council_salaries_generous } }
+				
+				#Councillors make 5% of whatever their liege is making on High Pay
+				change_variable = {
+					name = aqoa_annual_income_councillor
+					multiply = 0.6		#0.05 x 12 = 0.6
+				}
+				
+				send_interface_message = {
+					type = aqoa_salary_councillor_received  # Appears in feed, not banner
+					desc = councillor_salary_received_desc
+					
+					left_icon = scope:host  # Your liege
+					right_icon = root       # You
+					
+					add_gold = var:aqoa_annual_income_councillor
+				}
+			}
+			
+		}
+	
+		#Knights
+		if = {
+			limit = {
+				is_knight = yes
+			}
+			set_variable = { name = aqoa_annual_income_knight 	value = scope:host.var:aqoa_monthly_income }		#Set variable
+		
+			if = {
+				limit = { scope:host = { has_realm_law_flag = aqoa_council_salaries_medium } }
+				
+				#Knights make 1% of whatever their liege is making on Medium Pay
+				change_variable = {
+					name = aqoa_annual_income_knight
+					multiply = 0.12
+				}
+				
+				send_interface_message = {
+					type = aqoa_salary_councillor_received  # Appears in feed, not banner
+					desc = councillor_salary_received_desc
+					
+					left_icon = scope:host  # Your liege
+					right_icon = root       # You
+					
+					add_gold = var:aqoa_annual_income_knight
+				}
+			}
+			else_if = {
+				limit = { scope:host = { has_realm_law_flag = aqoa_council_salaries_low } }
+				
+				#Knights make 0.5% of whatever their liege is making on Low Pay
+				change_variable = {
+					name = aqoa_annual_income_knight
+					multiply = 0.06
+				}
+				
+				send_interface_message = {
+					type = aqoa_salary_councillor_received  # Appears in feed, not banner
+					desc = councillor_salary_received_desc
+					
+					left_icon = scope:host  # Your liege
+					right_icon = root       # You
+					
+					add_gold = var:aqoa_annual_income_knight
+				}
+			}
+			else_if = {
+				limit = { scope:host = { has_realm_law_flag = aqoa_council_salaries_none } }
+				
+				#Knights make 0% of whatever their liege is making on No Pay
+				change_variable = {
+					name = aqoa_annual_income_knight
+					multiply = 0
+				}
+			}
+			else_if = {
+				limit = { scope:host = { has_realm_law_flag = aqoa_council_salaries_high } }
+				
+				#Knights make 1.5% of whatever their liege is making on High Pay
+				change_variable = {
+					name = aqoa_annual_income_knight
+					multiply = 0.18
+				}
+				
+				send_interface_message = {
+					type = aqoa_salary_councillor_received  # Appears in feed, not banner
+					desc = councillor_salary_received_desc
+					
+					left_icon = scope:host  # Your liege
+					right_icon = root       # You
+					
+					add_gold = var:aqoa_annual_income_knight
+				}
+			}
+			else_if = {
+				limit = { scope:host = { has_realm_law_flag = aqoa_council_salaries_generous } }
+				
+				#Knights make 2.5% of whatever their liege is making on High Pay
+				change_variable = {
+					name = aqoa_annual_income_knight
+					multiply = 0.3
+				}
+				
+				send_interface_message = {
+					type = aqoa_salary_councillor_received  # Appears in feed, not banner
+					desc = councillor_salary_received_desc
+					
+					left_icon = scope:host  # Your liege
+					right_icon = root       # You
+					
+					add_gold = var:aqoa_annual_income_knight
+				}
+			}
+		}
+    }
+}
+
+#Death Inheritance
+olympia_aqoa.1006 = {
+	hidden = yes
+	type = character_event
+
+	trigger = {
+		OR = {
+			gold > 10
+			is_landed_or_landless_administrative = no
+			is_clergy = no
+			is_ai = yes
+			NOT = { has_trait = acotw_obscured }
+		}
+	}
+	
+	immediate = {
+		amfac_death_inheritance = yes
+	}
+	
+}
+
+#effect aqoa_calculate_income_rulers = yes

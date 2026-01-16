@@ -1,0 +1,18 @@
+version="4.0"
+tags={
+	"Character Interactions"
+	"Character Focuses"
+	"Gameplay"
+	"Balance"
+	"Decisions"
+	"Events"
+	"Graphics"
+	"Portraits"
+	"Fixes"
+	"Total Conversion"
+}
+name="Congenital Beauty"
+picture="thumbnail.png"
+supported_version="1.*"
+path="C:/Users/gerbe/Documents/Paradox Interactive/Crusader Kings III/mod/2695438942"
+remote_file_id="2695438942"

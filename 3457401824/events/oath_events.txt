@@ -1,0 +1,117 @@
+﻿namespace = oath_events
+
+
+oath_events.0001 = { # An Oath Sworn - from landless perspective
+	type = character_event
+	title = oath_events.0001.t
+	desc = oath_events.0001.desc
+	theme = crown
+
+	override_background = {
+		reference = throne_room
+	}
+
+	left_portrait = {
+		character = root
+		animation = throne_room_kneel_1
+	}
+
+	right_portrait = {
+		character = var:val_oathholder
+		animation = spymaster
+	}
+
+	is_triggered_only = yes
+
+	option = { # "So my Oath begins."
+		name = oath_events.0001.a
+        custom_tooltip = {
+			text = oath_events.0001.a.desc
+		}
+
+        add_trait = oathkeeper
+		add_trait = loyal
+		remove_trait = disloyal
+
+		set_relation_oathholder = {
+			target = var:val_oathholder
+		}
+		        
+		var:val_oathholder = {
+			add_hook = {
+				target = root
+				type = obligation_hook
+			}
+			add_character_modifier = { modifier = oathholder_life }
+        }
+	}
+
+    option = { # "I have reconsidered."
+		name = oath_events.0001.b
+        custom_tooltip = {
+			text = oath_events.0001.b.desc
+		}
+	}
+}
+
+oath_events.1001 = { # An Oath Sworn - from ruler perspective
+	type = character_event
+	title = oath_events.1001.t
+	desc = oath_events.1001.desc
+	theme = crown
+
+	override_background = {
+		reference = throne_room
+	}
+
+	left_portrait = {
+		character = root
+		animation = spymaster
+	}
+
+	right_portrait = {
+		character = var:val_oathkeeper
+		animation = throne_room_kneel_1
+	}
+
+	is_triggered_only = yes
+
+	option = { # "I accept your oath."
+		name = oath_events.1001.a
+        custom_tooltip = {
+			text = oath_events.1001.a.desc
+		}
+
+		var:val_oathkeeper = {
+			add_trait = oathkeeper
+			remove_trait = disloyal
+			add_trait = loyal
+		}
+        
+
+		set_relation_oathbound = {
+			target = var:val_oathkeeper
+		}
+		        
+		add_hook = {
+			target = var:val_oathkeeper
+			type = obligation_hook
+		}
+		add_character_modifier = { modifier = oathholder_life }
+	}
+
+    option = { # "I do not accept."
+		name = oath_events.1001.b
+        custom_tooltip = {
+			text = oath_events.1001.b.desc
+		}
+
+		var:val_oathkeeper = {
+			add_opinion = {
+				target = root
+				modifier = rejected_by_oathholder_opinion
+			}
+		}
+	}
+}
+

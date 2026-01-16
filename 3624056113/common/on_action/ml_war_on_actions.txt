@@ -1,0 +1,32 @@
+﻿on_war_started = {
+	on_actions = {
+		ml_war_on_action
+	}
+}
+
+ml_war_on_action = {
+	effect = {
+		scope:war.primary_attacker = {
+			every_vassal = {
+				limit = {
+					is_manor_lord = yes
+				}
+				trigger_event = {
+					id = ml_war.0001
+					days = 1
+				}
+			}
+		scope:war.primary_defender = {
+			every_vassal = {
+				limit = {
+					is_manor_lord = yes
+				}
+				trigger_event = {
+					id = ml_war.0001
+					days = 1
+				}
+			}
+		}
+	}
+}
+# I HATE ON ACTIONS I HATE ON ACTIONS I HATE ON ACTIONS I HATE ON ACTIONS I HATE ON ACTIONS I HATE ON ACTIONS

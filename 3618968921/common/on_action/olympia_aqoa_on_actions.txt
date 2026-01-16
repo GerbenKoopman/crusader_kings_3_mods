@@ -1,0 +1,85 @@
+﻿on_game_start_after_lobby = {
+	on_actions = {
+		on_game_start_after_lobby_olympia_aqoa
+	}
+}
+
+on_game_start_after_lobby_olympia_aqoa = {
+	events = {
+		olympia_aqoa.1001		#Assign all starting adult characters with congenital XP and upbringing
+	}
+}
+
+on_birth_child = {
+	on_actions = {
+		on_birth_child_aqoa
+	}
+}
+
+on_birth_child_aqoa = {
+
+	events = {
+		olympia_aqoa.1002				#Force a recheck on the court to get proper affluence
+	}
+}
+
+on_birthday = {
+	on_actions = {
+		on_birthday_aqoa_wealth_check
+	}
+}
+
+on_birthday_aqoa_wealth_check = {
+	
+	trigger = {
+		NOT = { has_trait = acotw_obscured }
+	}
+	
+	events = {
+		olympia_aqoa.1003
+		olympia_aqoa.1005		#Get councillors and knights paid
+	}
+}
+
+on_imprison = {
+	on_actions = {
+		on_imprison_aqoa
+	}
+}
+
+on_imprison_aqoa = {
+	trigger = {
+		NOT = { has_trait = acotw_obscured }
+		is_in_prison_type = dungeon
+	}
+	
+	effect = {
+		set_variable = { name = aqoa_monthly_income value = 0 }
+		add_trait_xp = { trait = olympia_class_tier value = -100 }
+	}
+}
+
+yearly_global_pulse = {
+	on_actions = {
+		yearly_global_pulse_aqoa
+	}
+}
+
+yearly_global_pulse_aqoa = {
+	events = {
+		olympia_aqoa.1004		#Get mercenaries paid
+	}
+}
+
+on_death = {
+	on_actions = {
+		on_death_amfac
+	}
+}
+
+on_death_amfac = {
+
+	events = {
+		olympia_aqoa.1006	#Distribute inheritance for unlanded courtiers
+	}
+}

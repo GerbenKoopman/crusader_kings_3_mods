@@ -1,0 +1,124 @@
+gnt_Revoke_noble_Estate_interaction = {
+
+	category = interaction_category_vassal
+	common_interaction = no
+	icon = revoke_title
+	desc = gnt_Revoke_noble_Estate_interaction_desc
+	highlighted_reason = HIGHLIGHTED_HAS_REVOKE_TITLE_REASON
+
+	is_shown = {
+		scope:actor = {
+	        government_has_flag = government_is_feudal
+		}
+		scope:recipient = {
+			liege = scope:actor
+			any_held_title = {
+				is_noble_family_title = yes
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		title_revocation_standard_valid_showing_failures_only_trigger = yes
+		# Plus make sure there's a legal right to revoke.
+		scope:actor = {
+			trigger_if = {
+				limit = { government_has_flag = government_is_tribal }
+				custom_description = {
+					text = "has_law_allowing_title_revocation_tribal"
+					has_realm_law_flag = title_revocation_allowed
+				}
+			}
+			trigger_else_if = {
+				limit = { government_is_japanese_trigger = yes }
+				custom_description = {
+					text = "has_law_allowing_title_revocation_soryo"
+					has_realm_law_flag = title_revocation_allowed
+				}
+			}
+			trigger_else_if = {
+				limit = { government_allows = administrative }
+			}
+			trigger_else = {
+				custom_description = {
+					text = "has_law_allowing_title_revocation_crown"
+					has_realm_law_flag = title_revocation_allowed
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				scope:recipient = {
+					vassal_contract_has_flag = vassal_contract_cannot_revoke_titles
+				}
+			}
+			custom_description = {
+				text = vassal_contract_forbids_revocation
+				scope:recipient = {
+					NOT = { vassal_contract_has_flag = vassal_contract_cannot_revoke_titles }
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				scope:recipient = {
+					vassal_contract_has_flag = admin_cannot_revoke_titles_without_cause
+				}
+				scope:actor = {
+					NOT = { has_revoke_title_reason = scope:recipient }
+				}
+			}
+			custom_tooltip = {
+				text = admin_contract_forbids_revocation_desc
+				scope:recipient = {
+					NOT = { vassal_contract_has_flag = admin_cannot_revoke_titles_without_cause }
+				}
+			}
+		}
+		# And uhh... the sensible check.
+		scope:recipient = {
+			is_vassal_of = scope:actor
+			NOT = { has_strong_hook = scope:actor }
+			trigger_if = { # If admin, they need to hold a title that isn't their noble family title
+				limit = { government_allows = administrative }
+				custom_tooltip = {
+					text = admin_no_valid_appointment
+					any_held_title = { is_landless_type_title = no }
+				}
+			}
+		}
+		custom_tooltip = {
+			text = cannot_take_overt_hostile_actions_against_diarch.tt
+			NOT = { scope:recipient ?= scope:actor.diarch }
+		}
+		custom_tooltip = {
+			text = protected_from_revocation.tt
+			NOT = { scope:recipient = { has_character_flag = titles_protected } }
+		}
+	}
+
+	auto_accept = yes
+
+	on_accept = {
+		scope:recipient = {
+			random_held_title = {
+				limit = {
+					is_noble_family_title = yes
+				}
+				save_scope_as = title_to_destroy
+				scope:recipient = {
+					destroy_title = scope:title_to_destroy
+				}
+			}
+			add_opinion = {
+			    modifier = revoked_title
+			    target = scope:actor
+				opinion = -80
+		    }
+			remove_opinion = {
+			    modifier = became_vassal
+			    target = scope:actor
+		    }
+		}
+	}
+}

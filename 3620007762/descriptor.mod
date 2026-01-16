@@ -1,0 +1,5 @@
+name="Bastards and Banners"
+picture="thumbnail.png"
+supported_version="1.18.*"
+path="C:/Users/dragf/Documents/Paradox Interactive/Crusader Kings III/mod/bastards_and_banners"
+remote_file_id="3620007762"

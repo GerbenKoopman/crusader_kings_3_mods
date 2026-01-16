@@ -1,0 +1,18 @@
+version="4.0"
+tags={
+	"Character Interactions"
+	"Character Focuses"
+	"Gameplay"
+	"Balance"
+	"Decisions"
+	"Events"
+	"Graphics"
+	"Portraits"
+	"Fixes"
+	"Historical"
+}
+name="Invite Debutantes"
+picture="thumbnail.png"
+supported_version="1.*"
+path="C:/Users/gerbe/Documents/Paradox Interactive/Crusader Kings III/mod/2677152091"
+remote_file_id="2677152091"

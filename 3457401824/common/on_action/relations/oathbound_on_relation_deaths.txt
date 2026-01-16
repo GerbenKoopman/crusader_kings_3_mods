@@ -1,0 +1,115 @@
+﻿on_death_relation_oathbound = { # Triggers from person that died. So we use scope:target to get the actor (us). -- Oathholder dies essentially.
+	on_actions = {
+		the_forced_oathbound_heir
+		the_permanent_oath_oathholder_perspective
+		the_permanent_oath_oathholder_perspective_not_valid
+		oathholder_dies_notif
+	}
+}
+
+the_forced_oathbound_heir = { # Ambitious characters only.
+	trigger = {
+		AND = {
+			NOT = { 
+				scope:target = { has_character_flag = oathbound_heir }
+				scope:target = { has_character_modifier = permanent_oath }
+			}
+			scope:target.primary_heir = { is_child_of = scope:target }
+
+			has_trait = ambitious
+			is_ai = yes
+			
+			# This is root, var:val_oathholder.
+			primary_heir = { is_child_of = root }			
+		}
+	}
+	effect = {
+		scope:target = {
+			add_character_flag = {
+				flag = oathbound_heir
+				days = 100
+			}
+
+			oathholder_heir_assigned = { CHARACTER = root.primary_heir }
+
+			trigger_event = oathbound_heir_events.0001
+		}
+	}
+}
+
+the_permanent_oath_oathholder_perspective = {
+	trigger = {
+		scope:target = { has_character_modifier = permanent_oath } # Oathbound has permanent_oath
+		primary_heir.dynasty = root.dynasty
+	}
+	effect = {
+		scope:target = {
+			add_character_modifier = { modifier = permanent_oath }
+			add_trait = oathkeeper
+			add_trait = loyal
+			remove_trait = disloyal
+
+			add_opinion = {
+				target = var:val_oathholder.primary_heir
+				modifier = oath_holder_opinion
+			}
+			set_relation_oathholder = {
+				target = var:val_oathholder.primary_heir
+			}
+			
+			var:val_oathholder.primary_heir = {
+				oathkeeper_assigned = { CHARACTER = scope:target }
+				add_opinion = {
+					target = this
+					modifier = oath_holder_opinion
+				}
+				add_character_modifier = { modifier = oathholder_life }
+			}
+			
+			var:val_oathholder.primary_heir = {
+				add_hook = {
+					target = this
+					type = obligation_hook
+				}
+			}
+
+			oathholder_assigned = { CHARACTER = var:val_oathholder.primary_heir}
+			trigger_event = {
+				id = oathbound_permanent_events.0003
+				days = 1
+			}
+		}
+	}
+}
+
+the_permanent_oath_oathholder_perspective_not_valid = {
+	trigger = {
+		scope:target = { has_character_modifier = permanent_oath } # Oathbound has permanent_oath
+		NOT = {
+			primary_heir.dynasty = root.dynasty
+		}
+		#OR = {
+		#	NOT = {
+		#		primary_heir = { is_child_of = root } # Oathholders heir is not their child.
+		#		primary_heir = { is_sibling_of = root }
+		#		primary_heir = { is_grandchild_of = root }
+		#	}
+		#}	
+	}
+	effect = {
+		scope:target = {
+			trigger_event = {
+				id = oathbound_permanent_events.0004
+				days = 1
+			}
+		}
+	}
+}
+
+oathholder_dies_notif = {
+	effect = {
+		scope:target = {
+			trigger_event = oathbound_notif.0001
+		}
+	}
+}

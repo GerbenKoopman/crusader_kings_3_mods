@@ -1,0 +1,29 @@
+﻿# gold cost
+gnt_grant_estate_cost = {
+	categories = {
+		tweaks
+	}
+	default = gnt_grant_estate_cost_default
+
+	gnt_grant_estate_cost_default = {
+	}
+	gnt_grant_estate_cost_half = {
+	}
+	gnt_grant_estate_cost_non = {
+	}
+}
+
+# ai will grant estate
+gnt_ai_grant_estate = {
+	categories = {
+		tweaks
+	}
+	default = gnt_ai_grant_estate_never
+
+	gnt_ai_grant_estate_never = {
+	}
+	gnt_ai_grant_estate_normal = {
+	}
+	gnt_ai_grant_estate_less = {
+	}
+}

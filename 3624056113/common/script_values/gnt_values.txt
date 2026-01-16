@@ -1,0 +1,34 @@
+﻿gnt_gold_cost_value = {
+	if = {
+		limit = { has_game_rule = gnt_grant_estate_cost_default }
+		value = 50
+	}
+	if = {
+		limit = { has_game_rule = gnt_grant_estate_cost_half }
+		value = 25
+	}
+	if = {
+		limit = { has_game_rule = gnt_grant_estate_cost_non }
+		value = 0
+	}
+}
+
+gnt_yearly_tax_value = {
+    add = root.monthly_character_income
+	multiply = 4.2 ###0.35*12
+	min = 1
+	max = 100
+	round = yes
+}
+
+gnt_yearly_tax_half = {
+    add = gnt_yearly_tax_value
+	divide = 2
+	min = 1
+	round = yes
+}
+
+gnt_yearly_tax_double = {
+    add = gnt_yearly_tax_value
+	multiply = 2
+}

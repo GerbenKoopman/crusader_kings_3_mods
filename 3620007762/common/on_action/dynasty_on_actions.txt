@@ -1,0 +1,765 @@
+# Latest and best version everything (Seemingly) works with rules. God I hope at least
+# I am sure there are better ways to do this.... but oh well. If it works, it works.
+
+on_dynasty_created = {
+    effect = {
+        if = {
+            limit = {
+                dynast = {
+                    has_trait = bastard
+                    NOT = { is_lowborn = yes }    # <-- prevents lowborn bastards from becoming founders
+                }
+            }
+
+            dynast = {
+
+                # =====================================================
+                # BASTARD → BASTARD FOUNDER
+                # =====================================================
+                remove_trait = bastard
+                add_trait = bastard_founder
+
+                # Save original dynasty for assigning children
+                save_scope_as = original_dynasty
+
+                # =====================================================
+                # DISABLE MODDED BASTARD FOUNDER CHECK
+                # =====================================================
+                if = {
+                    limit = { has_game_rule = nss_bastard_founder_disabled }
+
+                    # Disabled mode: only perform vanilla trait change
+                    # No cadet branch, no inheritance, no CoA logic, no child reassignment
+                }
+                else_if = {
+                    limit = {
+                        OR = {
+                            has_game_rule = nss_bastard_founder_enabled
+
+                            AND = {
+                                has_game_rule = nss_bastard_founder_landed
+                                highest_held_title_tier >= tier_barony
+                            }
+                        }
+                    }
+
+                    # =====================================================
+                    # DETERMINE PROPER DYNASTY INHERITANCE FOR BASTARD
+                    # =====================================================
+
+                    # MATERNAL INHERITANCE
+                    if = {
+                        limit = {
+                            mother = { exists = yes }
+                            is_bastard_of_real_mother = yes
+
+                            OR = {
+                                father = { NOT = { exists = yes } }      # Father unknown
+                                father = { is_lowborn = yes }           # Father lowborn
+
+                                mother = { faith = { has_doctrine = doctrine_gender_female_dominated } }
+                                mother = { faith = { has_doctrine = doctrine_gender_equal } }
+                            }
+                        }
+
+                        set_house = mother.house
+                        set_dynasty = mother.dynasty
+                    }
+
+                    # PATERNAL INHERITANCE (fallback)
+                    else_if = {
+                        limit = {
+                            father = { exists = yes }
+                            is_bastard_of_real_father = yes
+                        }
+
+                        set_house = father.house
+                        set_dynasty = father.dynasty
+                    }
+
+
+                    # ======================================================
+                    # CUSTOM CADET HOUSE LOGIC
+                    # ======================================================
+                    hidden_effect = {
+
+                        # =====================================================
+                        # REQUIRED vanilla naming scaffolding. Applies globally
+                        # =====================================================
+                        save_scope_as = new_head
+                        save_scope_as = new_house_head
+
+                        hidden_effect = {
+                            house.house_head = { save_scope_as = former_house_head }
+                            house = { save_scope_as = former_house }
+                        }
+
+                        # ===============================================================================
+                        # CACHE THE TRUE HOUSE FOUNDER (STABLE SCOPE) — MUST RUN BEFORE ANY CADET LOGIC
+                        # ================================================================================
+                        house = {
+                            house_head = { save_scope_as = founder }
+                        }
+			# Also save the dynasty head / dynasty founder as fallback (helps cover unlanded founders? Might not be needed now)
+			dynast = {
+    			    dynasty_head = { save_scope_as = founder }
+			}
+
+                        # =====================================================================================
+                        # FRANKISH naming (prefix "de" + primary title). Thanks Franks, Normies and Occitoes. 
+                        # =====================================================================================
+                        if = {
+                            limit = {
+                                is_landed = yes
+                                highest_held_title_tier <= tier_duchy
+                                OR = {
+                                    culture = { has_cultural_pillar = heritage_frankish }
+                                    top_liege = {
+                                        has_title = title:k_france
+                                        culture = { has_cultural_pillar = heritage_frankish }
+                                    }
+                                }
+                            }
+
+                            create_cadet_branch = {
+                                prefix = dynnp_de
+                                name = cadet_name_style_primary_title
+                                save_scope_as = new_house
+                            }
+
+                            scope:new_house = {
+                                save_scope_as = new_house_head
+                                nss_coa_modify_cadet_coa = yes
+                            }
+                        }
+
+                        # =====================================================
+                        # Indian / East / Chinese / Korean (barony dynasty)
+                        # =====================================================
+                        else_if = {
+                            limit = {
+                                is_landed = yes
+                                culture = {
+                                    OR = {
+                                        has_cultural_pillar = heritage_indo_aryan
+                                        has_cultural_pillar = heritage_dravidian
+                                        has_cultural_pillar = heritage_viet
+                                        has_name_list = name_list_vietnamese
+                                        has_name_list = name_list_khmer
+                                        has_name_list = name_list_mon
+                                        has_name_list = name_list_cham
+                                        has_name_list = name_list_tai
+                                        has_cultural_pillar = heritage_chinese
+                                        has_name_list = name_list_han
+                                        has_cultural_pillar = heritage_korean
+                                        has_name_list = name_list_korean
+                                        has_cultural_pillar = heritage_buyeo
+                                        has_name_list = name_list_balhae
+                                    }
+                                }
+                                NOT = { faith.religion = religion:islam_religion }
+                            }
+
+                            create_cadet_branch = {
+                                name = cadet_name_style_barony_dynasty
+                                save_scope_as = new_house
+                            }
+
+                            scope:new_house = { generate_coa = yes }
+                        }
+
+                        # =====================================================
+                        # Malay County-Dynasty
+                        # =====================================================
+                        else_if = {
+                            limit = {
+                                is_landed = yes
+                                culture = { has_name_list = name_list_malay }
+                            }
+
+                            create_cadet_branch = {
+                                name = cadet_name_style_county_dynasty
+                                save_scope_as = new_house
+                            }
+
+                            scope:new_house = { generate_coa = yes }
+                        }
+
+                        # =====================================================
+                        # Japanese naming
+                        # =====================================================
+                        else_if = {
+                            limit = {
+                                culture = {
+                                    OR = {
+                                        has_cultural_pillar = heritage_japonic
+                                        has_name_list = name_list_yamato
+                                    }
+                                }
+                            }
+
+                            create_cadet_branch = {
+                                name = japanese_house_name_fallback
+                                save_scope_as = new_house
+                            }
+
+                            scope:new_house = { generate_coa = yes }
+                        }
+
+                        # =====================================================
+                        # DEFAULT cadet branching 
+                        # =====================================================
+                        else = {
+
+                            # ==========================================================================
+                            # UNLANDED BASTARD FOUNDER COA OVERRIDE — RUN FIRST TO AVOID BANNER MESSUP
+                            # ==========================================================================
+                            if = {
+                                limit = {
+                                    dynast = { has_trait = bastard_founder }
+				    NOT = { highest_held_title_tier >= tier_barony }  # Crucial, struggled forever with wrong scope
+                                    has_game_rule = nss_coa_rule_capital
+                                }
+
+                                # Create cadet branch first (needs grabbed dynasty)
+                                create_cadet_branch = { save_scope_as = new_house }
+
+                                # Clear inherited quartered CoA and generate a fully fitting random one
+                                scope:new_house = {
+                                    set_coa = none
+                                    generate_coa = yes
+                                }
+                            }
+                            else = {
+
+                                # =====================================================
+                                # Normal default cadet branch naming
+                                # =====================================================
+                                create_cadet_branch = { save_scope_as = new_house }
+
+                                scope:new_house = {
+                                    save_scope_as = new_house_head
+                                    nss_coa_modify_cadet_coa = yes
+                                }
+                            }
+                        }
+
+                        # ==================================================================
+                        # Assign all children of the new bastard founder to new cadet house
+                        # ==================================================================
+                        every_child = {
+                            limit = {
+                                parent = scope:dynast
+                                NOT = { house = scope:new_house }
+                            }
+                            set_house = scope:new_house
+                        }
+
+                    } # end hidden_effect
+
+                } # end else (full system enabled)
+
+            } # end dynast
+        } # end if
+    } # end effect
+} # end on_dynasty_created
+
+# ==================== GREAT WALL OF BASTARDS ========================
+
+
+
+
+
+
+
+
+# root = <character>
+# scope:dynasty = <dynasty>
+# new dynasty head and dynasty affected
+on_became_dynasty_head = {
+	effect = {
+		if = {
+			limit = {
+				has_trait = denounced
+			}
+			remove_trait = denounced
+		}
+		if = {
+			limit = {
+				has_trait = disinherited
+			}
+			remove_trait = disinherited
+		}
+	}
+}
+
+# root = <character>
+# scope:house = <house>
+# new house head and house affected
+on_became_house_head = {
+	effect = {
+		if = {
+			limit = {
+				has_trait = decadent
+			}
+			remove_trait = decadent
+		}
+		if = {
+			limit = {
+				has_trait = extolled
+			}
+			remove_trait = extolled
+		}
+		#Mandala?
+		if = {
+			limit = { government_has_flag = government_is_mandala }
+			#Set up the Serenity modifier
+			house = {
+				if = {
+					limit = { has_house_power_parameter = aspect_of_serenity }
+					if = {
+						limit = { has_house_head_parameter = peaceful_rule_yearly_modifier }
+						house_head = {
+							remove_variable = mandala_house_power_accumulated_increments_of_peace
+							set_variable = {
+								name = mandala_house_power_accumulated_increments_of_peace
+								value = 1
+							}
+							add_character_modifier = { modifier = mandala_increments_of_peace_modifier }
+							trigger_event = {
+								id = tgp_east_asia_mandala_events.0200
+								years = 1
+							}
+						}
+					}
+					else_if = {
+						limit = { house_has_peaceful_rule_3_year_trigger = yes }
+						house_head = {
+							remove_variable = mandala_house_power_accumulated_increments_of_peace
+							set_variable = {
+								name = mandala_house_power_accumulated_increments_of_peace
+								value = 1
+							}
+							add_character_modifier = { modifier = mandala_increments_of_peace_modifier }
+							trigger_event = {
+								id = tgp_east_asia_mandala_events.0200
+								years = 3
+							}
+						}
+					}
+					else = {
+						house_head = {
+							remove_variable = mandala_house_power_accumulated_increments_of_peace
+							set_variable = {
+								name = mandala_house_power_accumulated_increments_of_peace
+								value = 1
+							}
+							add_character_modifier = { modifier = mandala_increments_of_peace_modifier }
+							trigger_event = {
+								id = tgp_east_asia_mandala_events.0200
+								years = 5
+							}
+						}
+					}
+					#Start tracking years of peace
+					house_head = {
+						#Check if it exists first as this is also applied on_game start and in on_house_aspiration_changed
+						if = {
+							limit = {
+								NOT = { has_variable = serenity_mandala_years_of_non_aggression_war }
+							}
+							set_variable = {
+								name = serenity_mandala_years_of_non_aggression_war
+								value = 0
+							}
+							trigger_event = {
+								id = tgp_east_asia_mandala_events.0205
+								years = 1
+							}
+						}
+					}
+				}
+			}	
+			#Set up the Creation modifier
+			house = {
+				if = {
+					limit = { has_house_power_parameter = aspect_of_creation }
+					if = {
+						limit = { has_house_head_parameter = creator_30_year_modifier }
+						house_head = {
+							remove_variable = mandala_house_power_accumulated_creator
+							set_variable = {
+								name = mandala_house_power_accumulated_creator
+								value = 1
+								years = 30
+							}
+							#We only set the modifier here, no message
+							hidden_effect = { mandala_apply_30_year_modifier = yes }
+						}
+					}
+					else_if = {
+						limit = { house_has_creator_20_years_trigger = yes }
+						house_head = {
+							remove_variable = mandala_house_power_accumulated_creator
+							set_variable = {
+								name = mandala_house_power_accumulated_creator
+								value = 1
+								years = 20
+							}
+							#We only set the modifier here, no message
+							hidden_effect = { mandala_apply_20_year_modifier = yes }
+						}
+					}
+					else = {
+						house_head = {
+							remove_variable = mandala_house_power_accumulated_creator
+							set_variable = {
+								name = mandala_house_power_accumulated_creator
+								value = 1
+								years = 10
+							}
+							#We only set the modifier here, no message
+							hidden_effect = { mandala_apply_10_year_modifier = yes }
+						}
+					}	
+				}
+			}
+		}	
+	}
+}
+
+# root = <house>
+# This house inside an admin realm just became dominant.
+on_house_in_admin_realm_became_dominant = {
+	effect = {
+		if = {
+			limit = {
+				# Get notified only if the dominant family is not the emperor's
+				root != root.house_head.top_liege.house
+			}
+			save_scope_as = noble_family_house
+			house_head = {
+				save_scope_as = noble_family_head
+				top_liege = {
+					every_vassal = {
+						limit = {
+							this = house.house_head
+							house != root
+						}
+						trigger_event = ep3_emperor_yearly.2420 # Reaction
+					}
+					trigger_event = ep3_emperor_yearly.2420 # Reaction
+				}
+			}
+		}
+	}
+}
+
+# root = <house>
+# This house inside an admin realm just became powerful.
+on_house_in_admin_realm_became_powerful = {
+	effect = {
+		if = {
+			limit = {
+				months_from_game_start >= 1
+			}
+			save_scope_as = new_family_house
+			house_head = {
+				save_scope_as = new_family
+				random_held_title = {
+					limit = { is_noble_family_title = yes }
+					save_scope_as = new_family_title
+				}
+				trigger_event = ep3_emperor_yearly.2401 # Your own Family reaction
+				top_liege = {
+					every_vassal = {
+						limit = {
+							this = house.house_head
+							house != root
+
+							# China has hundreds of Noble Families, it gets spammy
+							NOT = { government_allows = merit }
+						}
+
+						# Notify every vassal house head - If they haven't been notified recently, we send an event, otherwise a feed message will do.
+						if = {
+							limit = {
+								has_character_flag = 8020_powerful_family_cooldown
+							}
+							send_interface_message = {
+								title = 8020_powerful_family_tt
+								type = msg_new_powerful_family
+								left_icon = scope:new_family
+								right_icon = scope:new_family_title
+								desc = 8020_powerful_family_desc
+							}
+						}
+						else = {
+							trigger_event = ep3_powerful_families.8020 # Powerful Family reaction
+							trigger_event = ep3_emperor_yearly.2400 # Non-Powerful Family reaction
+						}
+					}
+
+					# Let's also notify the liege, but they don't get an event.
+					send_interface_message = {
+						title = 8020_powerful_family_tt
+						type = msg_new_powerful_family
+						left_icon = scope:new_family
+						right_icon = scope:new_family_title
+						desc = 8020_powerful_family_desc
+					}
+				}
+			}
+		}
+	}
+}
+
+
+# A new relation between two houses has just been created.
+# root = <house_relation>
+on_house_relation_created = {
+	effect = {
+		set_variable = {
+			name = house_relation_duration_years
+			value = 0
+		}
+	}
+}
+
+# An existing relation between two houses has just been changed
+# root = <house_relation>
+on_house_relation_level_changed = {
+	effect = {
+		
+	}
+}
+
+# A relation between two houses is just about to be destroyed.
+# root = <house_relation>
+on_house_relation_destroyed = {
+	effect = {
+		
+	}
+}
+
+# This House's House Power was just upgraded
+# root = <character>
+# scope:house = <house>
+on_house_aspiration_upgraded = {
+	effect = {
+		if = {
+			limit = {
+				house = { 
+					has_house_power_parameter = aspect_of_creation
+					NOT = { has_house_power_parameter = aspect_of_creation_01 }
+				}
+			}
+			create_character_memory = { type = upgraded_creation_aspect_memory }
+		}
+		if = {
+			limit = {
+				house = { 
+					has_house_power_parameter = aspect_of_serenity
+					NOT = { has_house_power_parameter = aspect_of_serenity_01 }
+				}
+			}
+			create_character_memory = { type = upgraded_serenity_aspect_memory }
+		}
+		if = {
+			limit = {
+				house = { 
+					has_house_power_parameter = aspect_of_destruction
+					NOT = { has_house_power_parameter = aspect_of_destruction_01 }
+				}
+			}		
+			create_character_memory = { type = upgraded_destruction_aspect_memory }
+		}
+		if = {
+			limit = {
+				house = { 
+					has_house_power_parameter = aspect_of_trickery
+					NOT = { has_house_power_parameter = aspect_of_trickery_01 }
+				}
+			}	
+			create_character_memory = { type = upgraded_trickery_aspect_memory }
+		}
+	}
+}
+
+# This House's House Power was changed
+# root = <character>
+# scope:house = <house>
+on_house_aspiration_changed = {
+    effect = {
+
+    	#####################
+    	# Mandala Government
+    	#####################
+    	if = {
+    		limit = { government_has_flag = government_is_mandala }
+	    	#Start tracking years of peace
+	    	if = {
+	    		limit = {
+	    			house = { has_house_head_parameter = peaceful_rule_5_year_modifier }
+	    			is_house_head = yes
+	    			NOT = { has_variable = mandala_house_power_accumulated_increments_of_peace }
+	    		}
+	    		set_variable = {
+	    			name = mandala_house_power_accumulated_increments_of_peace
+	    			value = 1
+	    		}
+	    		add_character_modifier = { modifier = mandala_increments_of_peace_modifier }
+	    		trigger_event = {
+	    			id = tgp_east_asia_mandala_events.0200
+	    			years = 5
+	    		}
+	    		#Check if it exists first as this is also applied on_game start
+	    		if = {
+	    			limit = {
+	    				NOT = { has_variable = serenity_mandala_years_of_non_aggression_war }
+	    			}
+	    			set_variable = {
+	    				name = serenity_mandala_years_of_non_aggression_war
+	    				value = 0
+	    			}
+	    			trigger_event = {
+	    				id = tgp_east_asia_mandala_events.0205
+	    				years = 1
+	    			}
+	    		}
+	    		#Clean up other Aspects if we just swapped to this one
+	    		if = {
+	    			limit = { has_character_modifier = mandala_creator_modifier }
+	    			remove_character_modifier = mandala_creator_modifier
+	    			remove_variable = mandala_house_power_accumulated_creator
+	    		}
+	    	}
+	    	#Give or update the Creator modifier
+	    	if = {
+	    		limit = {
+	    			house = { has_house_head_parameter = aspect_of_creation }
+	    			is_house_head = yes
+	    		}
+	    		#Save what we gained so far so we can add it to the refreshed variable
+	    		if = {
+	    			limit = { has_variable = mandala_house_power_accumulated_creator }
+	    			save_scope_value_as = {
+	    				name = accumulated_creator_increments
+	    				value = var:mandala_house_power_accumulated_creator
+	    			}
+	    			remove_variable = mandala_house_power_accumulated_creator
+	    		}
+	    		#Maxed out
+		    	if = {
+					limit = {
+						house = { has_house_head_parameter = creator_30_year_modifier }
+					}
+					set_variable = {
+						name = mandala_house_power_accumulated_creator
+						value = scope:accumulated_creator_increments
+						years = 30
+					}
+					#We only set the modifier here, no message
+					hidden_effect = { mandala_apply_30_year_modifier = yes }
+				}
+				#Second Tier
+				else_if = {
+					limit = {
+						house = { house_has_creator_20_years_trigger = yes }
+					}
+					set_variable = {
+						name = mandala_house_power_accumulated_creator
+						value = scope:accumulated_creator_increments
+						years = 20
+					}
+					#We only set the modifier here, no message
+					hidden_effect = { mandala_apply_20_year_modifier = yes }
+				}
+				#First Tier
+				else = {
+					if = {
+						limit = { exists = scope:accumulated_creator_increments }
+						set_variable = {
+							name = mandala_house_power_accumulated_creator
+							value = scope:accumulated_creator_increments
+							years = 10
+						}
+					}
+					else = {
+						set_variable = {
+							name = mandala_house_power_accumulated_creator
+							value = 1
+							years = 10
+						}
+					}
+					#We only set the modifier here, no message
+					hidden_effect = { mandala_apply_10_year_modifier = yes }
+					#Clean up other Aspects if we just swapped to this one
+					if = {
+						limit = { has_character_modifier = mandala_increments_of_peace_modifier }
+						remove_character_modifier = mandala_increments_of_peace_modifier
+						remove_variable = mandala_house_power_accumulated_increments_of_peace
+					}
+				}
+	    	}
+	    	#Just started on this track
+	    	if = {
+	    		limit = {
+	    			house = {
+	    				has_house_power_parameter = aspect_of_creation
+	    				NOR = {
+	    					has_house_power_parameter = aspect_of_creation_02
+	    					has_house_power_parameter = aspect_of_creation_03
+	    					has_house_power_parameter = aspect_of_creation_04
+	    					has_house_power_parameter = aspect_of_creation_05
+	    				}
+	    			}
+	    		}
+	    		create_character_memory = { type = picked_creation_aspect_memory }
+	    	}
+	    	if = {
+	    		limit = {
+	    			house = {
+	    				has_house_power_parameter = aspect_of_serenity
+	    				NOR = {
+	    					has_house_power_parameter = aspect_of_serenity_02
+	    					has_house_power_parameter = aspect_of_serenity_03
+	    					has_house_power_parameter = aspect_of_serenity_04
+	    					has_house_power_parameter = aspect_of_serenity_05
+	    				}
+	    			}
+	    		}	
+	    		create_character_memory = { type = picked_serenity_aspect_memory }
+	    	}
+	    	if = {
+	    		limit = {
+	    			house = {
+	    				has_house_power_parameter = aspect_of_destruction
+	    				NOR = {
+	    					has_house_power_parameter = aspect_of_destruction_02
+	    					has_house_power_parameter = aspect_of_destruction_03
+	    					has_house_power_parameter = aspect_of_destruction_04
+	    					has_house_power_parameter = aspect_of_destruction_05
+	    				}
+	    			}
+	    		}
+	    		create_character_memory = { type = picked_destruction_aspect_memory }
+	    	}
+	    	if = {
+	    		limit = {
+	    			house = {
+	    				has_house_power_parameter = aspect_of_trickery
+	    				NOR = {
+	    					has_house_power_parameter = aspect_of_trickery_02
+	    					has_house_power_parameter = aspect_of_trickery_03
+	    					has_house_power_parameter = aspect_of_trickery_04
+	    					has_house_power_parameter = aspect_of_trickery_05
+	    				}
+	    			}
+	    		}
+	    		create_character_memory = { type = picked_trickery_aspect_memory }
+	    	}
+    	}
+	}
+}
+

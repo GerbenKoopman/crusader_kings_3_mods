@@ -1,0 +1,25 @@
+﻿# this = house
+nss_coa_modify_cadet_coa = {
+
+	house_head = {
+		dynasty = {
+			save_scope_as = coa_dynasty
+		}
+		capital_barony = {
+			save_scope_as = coa_capital
+		}
+	}
+
+	if = {
+		limit = { has_game_rule = nss_coa_rule_dynasty }
+		set_coa = scope:coa_dynasty
+	}
+	else_if = {
+		limit = { has_game_rule = nss_coa_rule_capital }
+		set_coa = scope:coa_capital
+	}
+	else_if = {
+		limit = { has_game_rule = nss_coa_rule_new }
+		generate_coa = yes
+	}
+}
