@@ -1,6 +1,6 @@
 ﻿dub_squire_interaction = {
 	category = interaction_category_vassal
-	icon = "gfx/interface/icons/character_interactions/interaction_knight.dds" # A valid vanilla icon
+	icon = "gfx/interface/icons/council_task_types/task_manage_guards.dds" # A valid vanilla icon
 
 	is_shown = {
 		scope:actor = { is_ruler = yes }
@@ -63,7 +63,7 @@
 
 request_knighthood_interaction = {
 	category = interaction_category_vassal
-	icon = "gfx/interface/icons/character_interactions/interaction_knight.dds"
+	icon = "gfx/interface/icons/council_task_types/task_manage_guards.dds"
 
 	is_shown = {
 		scope:actor = {

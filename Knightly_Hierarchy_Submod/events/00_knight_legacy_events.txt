@@ -86,21 +86,17 @@ knight_legacy_events.0002 = {
 # EVENT 3: House Ascended (Notification)
 knight_legacy_events.0003 = {
 	type = character_event
-	title = "A Warrior House"
-	desc = "House [From.GetHouse.GetName] has proven its worth. Five knights they have given me, and now their name is synonymous with martial excellence."
 	theme = martial
 	option = {
-		name = "Knights of the Realm!"
+		name = knights_of_the_realm_option
 	}
 }
 
 # EVENT 4: House Fallen (Notification)
 knight_legacy_events.0004 = {
 	type = character_event
-	title = "Fading Glory"
-	desc = "We have rested on our laurels too long. House [From.GetHouse.GetName] has lost its reputation as a producer of knights."
 	theme = martial
 	option = {
-		name = "A shame."
+		name = a_shame
 	}
 }
