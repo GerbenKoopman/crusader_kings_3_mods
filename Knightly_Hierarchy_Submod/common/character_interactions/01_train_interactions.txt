@@ -1,0 +1,67 @@
+train_master_interaction = {
+    category = interaction_category_vassal
+    icon = "gfx/interface/icons/character_interactions/interaction_prowess.dds"
+    
+    is_shown = {
+        scope:actor = { is_ruler = yes }
+        scope:recipient = {
+            is_courtier_of = scope:actor
+            is_adult = yes
+            is_knight = no
+            has_landed_title = no
+            # Only for "Masters" (Sons of Knights/Manorial Lords)
+            OR = {
+                father = {
+                    OR = {
+                        has_trait = trait_dubbed_knight
+                        is_manorial_lord = yes
+                    }
+                }
+                mother = {
+                    OR = {
+                        has_trait = trait_dubbed_knight
+                        is_manorial_lord = yes
+                    }
+                }
+            }
+        }
+    }
+
+    is_valid_showing_failures_only = {
+        scope:actor = { gold >= 50 }
+        scope:recipient = {
+            is_imprisoned = no
+            NOT = { has_character_flag = received_training_flag }
+        }
+    }
+
+    on_accept = {
+        scope:actor = { remove_short_term_gold = 50 }
+        scope:recipient = {
+            add_character_flag = { flag = received_training_flag years = 5 }
+            
+            # 70% chance to gain Prowess, 30% for Commander trait
+            random_list = {
+                70 = {
+                    add_prowess_skill = 2
+                    send_interface_toast = {
+                        title = "Training Successful"
+                        left_icon = scope:recipient
+                        custom_tooltip = "msg_training_prowess"
+                    }
+                }
+                30 = {
+                    add_random_commander_trait_effect = yes
+                    send_interface_toast = {
+                        title = "Tactical Training"
+                        left_icon = scope:recipient
+                        custom_tooltip = "msg_training_commander"
+                    }
+                }
+            }
+        }
+    }
+    
+    localization = "train_master_interaction"
+    auto_accept = yes
+}

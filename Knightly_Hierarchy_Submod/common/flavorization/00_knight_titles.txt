@@ -40,6 +40,8 @@ flavor_manorial_squire = {
 	trigger = {
 		is_manorial_lord = yes # Checks for the Manor Domicile
 		NOT = { has_trait = trait_dubbed_knight }
+		# CHANGED: Allow Count tier (since the manor is a county), block Dukes
+		highest_held_title_tier < tier_duchy 
 	}
 	prefix = "title_squire"
 }
@@ -51,7 +53,8 @@ flavor_manorial_ser = {
 	trigger = {
 		is_manorial_lord = yes
 		has_trait = trait_dubbed_knight
-		highest_held_title_tier < tier_county # So Counts, Dukes, etc. keep their primary title
+		# CHANGED: Allow Count tier, block Dukes
+		highest_held_title_tier < tier_duchy 
 	}
 	prefix = "title_ser_knight"
 }

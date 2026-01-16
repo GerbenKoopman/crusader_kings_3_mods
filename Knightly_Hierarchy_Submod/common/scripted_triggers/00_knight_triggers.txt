@@ -4,7 +4,11 @@ is_manorial_lord = {
 	# 1. Must have a domicile (The estate mechanic)
 	has_domicile = yes
 	# 2. That Domicile MUST be a Manor
-	domicile = {
-		domicile_type = manor_domicile
+	OR = {
+		# The Modded Feudal Manor (From mod 3624056113)
+		domicile = { domicile_type = feudalmanor }
+		
+		# The Vanilla Admin Manor (Roads to Power compatibility)
+		domicile = { domicile_type = manor_domicile }
 	}
 }
