@@ -4,6 +4,9 @@ l_english:
  title_master: "[This.GetGender|E(male:Master,female:Mistress)]"
  title_squire: "Squire"
  title_ser_knight: "[This.GetGender|E(male:Ser,female:Dame)]"
+ title_mistress: "Mistress"
+ title_squire_female: "Squire"
+ title_dame_knight: "Dame"
 
  # Trait
  trait_dubbed_knight: "Knight"

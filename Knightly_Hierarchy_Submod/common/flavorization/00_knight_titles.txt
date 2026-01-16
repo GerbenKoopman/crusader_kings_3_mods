@@ -58,3 +58,66 @@ flavor_manorial_ser = {
 	}
 	prefix = "title_ser_knight"
 }
+
+### FEMALE TITLES ###
+
+# 1. SERGEANT (Female)
+flavor_knight_sergeant_female = {
+	type = character
+	gender = female
+	priority = 20
+	trigger = {
+		is_knight = yes
+		is_lowborn = yes
+		has_landed_title = no
+	}
+	prefix = "title_sergeant"
+}
+
+# 2. MISTRESS (Noble/Gentry, Unlanded, Not a Knight)
+flavor_knight_mistress = {
+	type = character
+	gender = female
+	priority = 25
+	trigger = {
+		is_lowborn = no
+		has_landed_title = no
+		is_knight = no
+		OR = {
+			is_adult = yes
+			is_child_of_ruler = no
+		}
+		# Only applies if she CAN fight (e.g. Shieldmaiden or Equal Faith)
+		can_be_combatant_based_on_gender_trigger = {
+			ARMY_OWNER = scope:liege
+			PROSPECTIVE_COMBATANT = root
+		}
+	}
+	prefix = "title_mistress"
+}
+
+# 3. SQUIRE (Female - "Dame-Squire" or just Squire)
+flavor_manorial_squire_female = {
+	type = character
+	gender = female
+	priority = 30
+	trigger = {
+		is_manorial_lord = yes
+		NOT = { has_trait = trait_dubbed_knight }
+		highest_held_title_tier < tier_duchy
+	}
+	prefix = "title_squire_female"
+}
+
+# 4. DAME (Female "Ser" equivalent)
+flavor_manorial_dame = {
+	type = character
+	gender = female
+	priority = 40
+	trigger = {
+		is_manorial_lord = yes
+		has_trait = trait_dubbed_knight
+		highest_held_title_tier < tier_duchy
+	}
+	prefix = "title_dame_knight"
+}
