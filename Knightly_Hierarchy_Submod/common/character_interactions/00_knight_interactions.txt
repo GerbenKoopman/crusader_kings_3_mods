@@ -5,27 +5,17 @@
 	is_shown = {
 		scope:actor = { is_ruler = yes }
 		scope:recipient = {
-			is_vassal_or_below_of = scope:actor
-			# Show for Squires and Masters who could be granted a manor and dubbed
+			
+			# --- RELATIONSHIP CHECK ---
+			# Must be either a vassal OR a courtier of a vassal
 			OR = {
-				is_manorial_lord = yes
-				AND = {
-					is_lowborn = no
-					is_knight = no
-					is_landed = no
-				}
+				is_courtier_of = scope:actor                    # MY courtiers
+				is_vassal_or_below_of = scope:actor             # MY vassals
+				liege = { is_vassal_or_below_of = scope:actor } # THEIR courtiers
 			}
-		}
-	}
 
-	is_valid_showing_failures_only = {
-		scope:actor = { prestige >= 50 }
-		scope:recipient = {
-			is_adult = yes
-			is_alive = yes
-			is_imprisoned = no
-			NOT = { has_trait = trait_dubbed_knight }
-			is_manorial_lord = yes
+			# --- ELIGIBILITY CHECK ---
+			is_lowborn = no
 		}
 	}
 
@@ -87,14 +77,6 @@ request_knighthood_interaction = {
 					ARMY_OWNER = scope:actor
 				}
 				has_trait = shieldmaiden
-			}
-
-			# INTEGRATION: Oathbound Mod
-			scope:recipient = {
-				AND = {
-					exists = set_relation_oathbound
-					set_relation_oathbound = scope:actor
-				}
 			}
 		}
 		scope:recipient = {

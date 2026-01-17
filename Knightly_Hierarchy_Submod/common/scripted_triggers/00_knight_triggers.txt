@@ -18,7 +18,6 @@
 is_knight_sergeant_trigger = {
 	is_knight = yes
 	is_lowborn = yes
-	is_landed = no
 }
 
 # Checks if character should be titled "Master" (Noble/Gentry, Unlanded, Undubbed)

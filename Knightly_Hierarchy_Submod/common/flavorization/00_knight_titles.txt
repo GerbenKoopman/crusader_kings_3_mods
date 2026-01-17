@@ -8,7 +8,7 @@
 flavor_knight_sergeant = {
 	type = character
 	gender = male
-	priority = 70
+	priority = 90
 	flag = knight_sergeant_flag
 	
 	flavourization_rules = {
@@ -19,7 +19,7 @@ flavor_knight_sergeant = {
 flavor_knight_sergeant_female = {
 	type = character
 	gender = female
-	priority = 70
+	priority = 90
 	flag = knight_sergeant_flag
 	
 	flavourization_rules = {
@@ -31,7 +31,7 @@ flavor_knight_sergeant_female = {
 flavor_knight_master = {
 	type = character
 	gender = male
-	priority = 55
+	priority = 90
 	flag = knight_master_flag
 	
 	flavourization_rules = {
@@ -43,7 +43,7 @@ flavor_knight_master = {
 flavor_knight_mistress = {
 	type = character
 	gender = female
-	priority = 55
+	priority = 90
 	flag = knight_mistress_flag
 	
 	flavourization_rules = {
@@ -58,7 +58,7 @@ flavor_manorial_squire = {
 	gender = male
 	special = domicile
 	domicile_type = feudalmanor
-	priority = 50
+	priority = 90
 	governments = { manorial_government }
 	
 	flavourization_rules = {
@@ -72,7 +72,7 @@ flavor_manorial_squire_female = {
 	gender = female
 	special = domicile
 	domicile_type = feudalmanor
-	priority = 50
+	priority = 90
 	governments = { manorial_government }
 	
 	flavourization_rules = {
@@ -84,8 +84,7 @@ flavor_manorial_squire_female = {
 flavor_manorial_ser = {
 	type = character
 	gender = male
-	priority = 60
-	governments = { manorial_government }
+	priority = 90
 	flag = dubbed_knight_flag
 	
 	flavourization_rules = {
@@ -97,8 +96,7 @@ flavor_manorial_ser = {
 flavor_manorial_dame = {
 	type = character
 	gender = female
-	priority = 60
-	governments = { manorial_government }
+	priority = 90
 	flag = dubbed_knight_flag
 	
 	flavourization_rules = {
