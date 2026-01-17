@@ -10,7 +10,7 @@ flavor_manorial_squire = {
 	gender = male
 	special = domicile
 	domicile_type = feudalmanor
-	priority = 30
+	priority = 50
 	governments = { manorial_government }
 	
 	flavourization_rules = {
@@ -24,7 +24,7 @@ flavor_manorial_squire_female = {
 	gender = female
 	special = domicile
 	domicile_type = feudalmanor
-	priority = 30
+	priority = 50
 	governments = { manorial_government }
 	
 	flavourization_rules = {
@@ -32,15 +32,11 @@ flavor_manorial_squire_female = {
 	}
 }
 
-# Manor Holder with Dubbed Knight trait - Male (Ser)
-# Note: Trait checking requires event/effect logic, not flavorization
-# This is a higher priority entry that can be activated via flag
+#  Dubbed Knight - Male (Ser)
 flavor_manorial_ser = {
 	type = character
 	gender = male
-	special = domicile
-	domicile_type = feudalmanor
-	priority = 40
+	priority = 60
 	governments = { manorial_government }
 	flag = dubbed_knight_flag
 	
@@ -49,13 +45,11 @@ flavor_manorial_ser = {
 	}
 }
 
-# Manor Holder with Dubbed Knight trait - Female (Dame)
+# Dubbed Knight - Female (Dame)
 flavor_manorial_dame = {
 	type = character
 	gender = female
-	special = domicile
-	domicile_type = feudalmanor
-	priority = 40
+	priority = 60
 	governments = { manorial_government }
 	flag = dubbed_knight_flag
 	

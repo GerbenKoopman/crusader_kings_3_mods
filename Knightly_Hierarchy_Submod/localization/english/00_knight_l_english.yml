@@ -1,11 +1,14 @@
 ﻿l_english:
  # Titles
  title_sergeant: "Sergeant"
+
  title_master: "Master"
- title_squire: "Squire"
- title_ser_knight: "Ser"
  title_mistress: "Mistress"
+
+ title_squire: "Squire"
  title_squire_female: "Squire"
+
+ title_ser_knight: "Ser"
  title_dame_knight: "Dame"
 
  flavor_knight_sergeant: "$title_sergeant$"

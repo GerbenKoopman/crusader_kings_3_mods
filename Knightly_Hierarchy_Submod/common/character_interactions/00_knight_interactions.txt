@@ -36,8 +36,8 @@
 		scope:recipient = {
 			add_trait = trait_dubbed_knight
 			add_opinion = {
-				modifier = dubbed_my_knight_modifier
 				target = scope:actor
+				modifier = dubbed_my_knight_modifier
 			}
 			# This is where we add to the House variable
 			house = {
@@ -81,9 +81,6 @@ request_knighthood_interaction = {
 			is_alive = yes
 			is_imprisoned = no
 			NOT = { has_trait = trait_dubbed_knight }
-			# Replaced can_fight with the scripted trigger for combatant eligibility
-			# DYNAMIC CHECK:
-			# Allows if Faith is Equal/Female Dominated OR if she has a special exemption (Shieldmaiden)
 			OR = {
 				can_be_combatant_based_on_gender_trigger = {
 					ARMY_OWNER = scope:actor
@@ -115,8 +112,8 @@ request_knighthood_interaction = {
 		}
 		scope:recipient = {
 			add_opinion = {
-				modifier = dubbed_my_knight_modifier
 				target = scope:actor
+				modifier = dubbed_my_knight_modifier
 			}
 		}
 	}
@@ -124,8 +121,8 @@ request_knighthood_interaction = {
 	on_decline = {
 		scope:actor = {
 			add_opinion = {
-				modifier = refused_knighthood_modifier
 				target = scope:recipient
+				modifier = refused_knighthood_modifier
 			}
 		}
 	}
