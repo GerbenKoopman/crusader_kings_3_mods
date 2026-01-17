@@ -1,24 +1,40 @@
 ﻿l_english:
- # Titles
+ # Titles / Flavorization
  title_ser_knight: "Ser"
  title_dame_knight: "Dame"
 
- flavor_manorial_ser: "$title_ser_knight$"
- flavor_manorial_dame: "$title_dame_knight$"
+ flavor_knight_ser: "$title_ser_knight$"
+ flavor_knight_dame: "$title_dame_knight$"
+ flavor_ser_simple: "$title_ser_knight$"
+ flavor_dame_simple: "$title_dame_knight$"
+ 
+ # Noble Family Title Names
+ knight_fee_name: "Knight's Fee of [holder.GetHouse.GetName]"
 
  # Trait
  trait_dubbed_knight: "Knight"
  trait_dubbed_knight_desc: "Dubbed a knight by their liege, a warrior of recognized skill and status."
- trait_dubbed_knight: "Knight"
 
- # Interaction
+ # Interaction - Dub Knight
  dub_squire_interaction: "Dub as Knight"
- dub_squire_interaction_desc: "Formalize this courtier's rank, granting them the title of Ser and adding to their House's glory."
+ dub_squire_interaction_desc: "Grant [recipient.GetShortUIName] the honor of knighthood, along with a knight's fee - a titular lordship recognizing their new status."
  dubbed_my_knight_modifier: "Dubbed me a Knight"
+ knight_grant_title_tt: "Will be granted a Knight's Fee (titular barony)"
+ 
+ # Interaction - Request Knighthood
  request_knighthood_interaction: "Request Knighthood"
- request_knighthood_interaction_desc: "Request your liege to grant you the honor of knighthood."
+ request_knighthood_interaction_desc: "Request your liege to grant you the honor of knighthood and a knight's fee."
  refused_knighthood_modifier: "Refused Knighthood"
  desc_refused_knighthood_modifier: "This character refused your request for knighthood, leaving you feeling slighted."
+ 
+ # AI Accept Reasons
+ SKILLED_WARRIOR_REASON: "Skilled Warrior"
+ MARTIAL_SKILL_REASON: "Martial Expertise"
+ 
+ # Custom Tooltips
+ can_be_knight_gender_tt: "Can serve as a combatant based on gender laws or is a shieldmaiden"
+ 
+ # Interaction - Train Knight
  train_master_interaction: "Train as Knight"
  train_master_interaction_desc: "Provide training to help this character develop their martial prowess."
  msg_training_prowess: "Their prowess has significantly improved through training."
@@ -37,3 +53,9 @@
  knight_legacy_events.0003.d: "House [ROOT.House.GetName] has proven its worth. Five knights they have given me, and now their name is synonymous with martial excellence."
  knight_legacy_events.0004.t: "Fading Glory"
  knight_legacy_events.0004.d: "We have rested on our laurels too long. House [ROOT.House.GetName] has lost its reputation as a producer of knights."
+
+ # Memory
+ knight_dubbing_memory: "Dubbed a Knight"
+ knight_dubbing_memory_desc: "[my_lord.GetName] dubbed me a knight and granted me a knight's fee. From that day on, I bore the title of Ser with pride."
+ knight_dubbing_memory_desc_second_perspective: "[my_lord.GetName] dubbed you a knight and granted you a knight's fee. From that day on, you bore the title with pride."
+ knight_dubbing_memory_desc_third_perspective: "[my_lord.GetName] dubbed [owner.GetHerHim] a knight. From that day on, [owner.GetSheHe] bore the title with pride."

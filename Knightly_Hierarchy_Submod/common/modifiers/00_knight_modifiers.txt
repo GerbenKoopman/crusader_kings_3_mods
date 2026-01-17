@@ -3,5 +3,5 @@ knightly_house_modifier = {
 	prowess = 2
 	martial = 1
 	monthly_dynasty_prestige = 0.2
-	icon = knightly_house_modifier.dds # A valid vanilla icon
+	icon = knightly_house_modifier
 }

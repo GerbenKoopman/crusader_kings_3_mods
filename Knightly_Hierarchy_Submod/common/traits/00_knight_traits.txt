@@ -1,4 +1,4 @@
-﻿trait_dubbed_knight = {
+﻿dubbed_knight = {
 	icon = gentry.dds
 	martial = 1
 	prowess = 1

@@ -1,20 +1,54 @@
-﻿is_knightly_lord = {
+﻿####################################
+# Knightly Hierarchy Triggers
+####################################
+
+# Checks if character is a landed knight (has titular knight title)
+is_knightly_lord = {
 	is_ruler = yes
-	has_government = manorial_government
-	
+	has_character_flag = dubbed_knight_flag
+	any_held_title = {
+		is_noble_family_title = yes
+	}
 }
 
-# Checks if character should be titled "Ser" (Has Manor + Dubbed)
+# Checks if character should be titled "Ser" (Male Dubbed Knight)
 is_ser_trigger = {
 	is_female = no
-	has_trait = trait_dubbed_knight
-	highest_held_title_tier < tier_county 
+	has_character_flag = dubbed_knight_flag
 }
 
-# Checks if character should be titled "Dame" (Female Has Manor + Dubbed)
-is_damee_trigger = {
+# Checks if character should be titled "Dame" (Female Dubbed Knight)
+is_dame_trigger = {
 	is_female = yes
-	has_trait = trait_dubbed_knight
-	highest_held_title_tier < tier_county 
+	has_character_flag = dubbed_knight_flag
 }
 
+# Checks if a character can be dubbed a knight
+can_be_dubbed_knight_trigger = {
+	is_adult = yes
+	is_alive = yes
+	is_imprisoned = no
+	is_lowborn = no
+	NOT = { has_trait = dubbed_knight }
+	NOT = { has_trait = devoted }
+	custom_description = {
+		text = can_be_knight_gender_tt
+		OR = {
+			can_be_combatant_based_on_gender_trigger = {
+				ARMY_OWNER = this
+			}
+			has_trait = shieldmaiden
+		}
+	}
+}
+
+# Checks if actor can dub knights
+can_dub_knights_trigger = {
+	OR = {
+		highest_held_title_tier >= tier_duchy
+		AND = {
+			highest_held_title_tier = tier_county
+			is_landed = yes
+		}
+	}
+}

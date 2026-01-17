@@ -1,19 +1,52 @@
-﻿#  Dubbed Knight - Male (Ser)
-flavor_manorial_ser = {
+﻿####################################
+# Knightly Hierarchy Flavorization
+####################################
+
+# Dubbed Knight - Male (Ser)
+# Uses flag-based detection for dubbed knights
+flavor_knight_ser = {
+	type = character
+	gender = male
+	special = holder
+	tier = county
+	priority = 95
+	flag = dubbed_knight_flag
+	flavourization_rules = {
+		top_liege = no
+	}
+}
+
+# Dubbed Knight - Female (Dame)
+flavor_knight_dame = {
+	type = character
+	gender = female
+	special = holder
+	tier = county
+	priority = 95
+	flag = dubbed_knight_flag
+	flavourization_rules = {
+		top_liege = no
+	}
+}
+
+# Fallback for dubbed knights who are not holders (courtiers with the flag)
+flavor_ser_simple = {
 	type = character
 	gender = male
 	priority = 90
 	flag = dubbed_knight_flag
-	
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 }
 
-# Dubbed Knight - Female (Dame)
-flavor_manorial_dame = {
+flavor_dame_simple = {
 	type = character
 	gender = female
 	priority = 90
 	flag = dubbed_knight_flag
-	
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 }
+

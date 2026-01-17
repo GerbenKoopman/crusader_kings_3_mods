@@ -1,4 +1,8 @@
-﻿on_turning_adult = {
+﻿####################################
+# Knightly Hierarchy On Actions
+####################################
+
+on_turning_adult = {
 	events = {
 		knight_legacy_events.0001
 	}
@@ -7,38 +11,5 @@
 on_death = {
 	events = {
 		knight_legacy_events.0002
-	}
-}
-
-# Set flag when dubbed knight trait is added
-on_trait_gain = {
-	on_actions = {
-		on_dubbed_knight_gained
-	}
-}
-
-on_dubbed_knight_gained = {
-	trigger = {
-		has_trait = trait_dubbed_knight
-	}
-	effect = {
-		add_character_flag = dubbed_knight_flag
-	}
-}
-
-# Remove flag when dubbed knight trait is removed
-on_trait_loss = {
-	on_actions = {
-		on_dubbed_knight_lost
-	}
-}
-
-on_dubbed_knight_lost = {
-	trigger = {
-		NOT = { has_trait = trait_dubbed_knight }
-		has_character_flag = dubbed_knight_flag
-	}
-	effect = {
-		remove_character_flag = dubbed_knight_flag
 	}
 }
