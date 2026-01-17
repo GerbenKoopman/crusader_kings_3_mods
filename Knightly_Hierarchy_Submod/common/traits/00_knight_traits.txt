@@ -1,5 +1,5 @@
 ﻿trait_dubbed_knight = {
-	icon = "gfx/interface/icons/council_task_types/task_manage_guards.dds"
+	icon = gentry.dds
 	martial = 1
 	prowess = 1
 	desc = trait_dubbed_knight_desc
