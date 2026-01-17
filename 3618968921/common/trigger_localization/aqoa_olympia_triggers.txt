@@ -1,3 +1,0 @@
-﻿has_councillor_salary_policy_cooldown = {
-	first_not = COUNCILLOR_SALARY_POLICY_IS_ON_COOLDOWN
-}

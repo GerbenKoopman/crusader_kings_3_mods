@@ -1,6 +1,0 @@
-﻿gnt_opinion = {
-	opinion = 55
-	decaying = yes
-	monthly_change = 0.1
-	stacking = no
-}

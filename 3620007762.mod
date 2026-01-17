@@ -1,5 +1,0 @@
-name="Bastards and Banners"
-picture="thumbnail.png"
-supported_version="1.18.*"
-path="C:/Users/gerbe/Documents/Paradox Interactive/Crusader Kings III/mod/3620007762"
-remote_file_id="3620007762"
