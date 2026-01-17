@@ -9,3 +9,89 @@ on_death = {
 		knight_legacy_events.0002
 	}
 }
+
+# Set flag when dubbed knight trait is added
+on_trait_gain = {
+	on_actions = {
+		on_dubbed_knight_gained
+	}
+}
+
+on_dubbed_knight_gained = {
+	trigger = {
+		has_trait = trait_dubbed_knight
+	}
+	effect = {
+		add_character_flag = dubbed_knight_flag
+	}
+}
+
+# Remove flag when dubbed knight trait is removed
+on_trait_loss = {
+	on_actions = {
+		on_dubbed_knight_lost
+	}
+}
+
+on_dubbed_knight_lost = {
+	trigger = {
+		NOT = { has_trait = trait_dubbed_knight }
+		has_character_flag = dubbed_knight_flag
+	}
+	effect = {
+		remove_character_flag = dubbed_knight_flag
+	}
+}
+
+# Update knight title flags quarterly
+quarterly_pulse = {
+	on_actions = {
+		update_knight_titles
+	}
+}
+
+update_knight_titles = {
+	trigger = {
+		is_alive = yes
+	}
+	effect = {
+		# Set flag for Sergeant (Lowborn, Unlanded Knight)
+		if = {
+			limit = { is_knight_sergeant_trigger = yes }
+			if = {
+				limit = { NOT = { has_character_flag = knight_sergeant_flag } }
+				add_character_flag = knight_sergeant_flag
+			}
+		}
+		else_if = {
+			limit = { has_character_flag = knight_sergeant_flag }
+			remove_character_flag = knight_sergeant_flag
+		}
+		
+		# Set flag for Master (Noble/Gentry, Unlanded, Undubbed Male)
+		if = {
+			limit = { is_knight_master_trigger = yes }
+			if = {
+				limit = { NOT = { has_character_flag = knight_master_flag } }
+				add_character_flag = knight_master_flag
+			}
+		}
+		else_if = {
+			limit = { has_character_flag = knight_master_flag }
+			remove_character_flag = knight_master_flag
+		}
+		
+		# Set flag for Mistress (Noble/Gentry, Unlanded, Undubbed Female)
+		if = {
+			limit = { is_knight_mistress_trigger = yes }
+			if = {
+				limit = { NOT = { has_character_flag = knight_mistress_flag } }
+				add_character_flag = knight_mistress_flag
+			}
+		}
+		else_if = {
+			limit = { has_character_flag = knight_mistress_flag }
+			remove_character_flag = knight_mistress_flag
+		}
+	}
+}

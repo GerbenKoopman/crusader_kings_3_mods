@@ -2,6 +2,54 @@
 # Note: Complex conditional logic (is_knight, is_lowborn, traits, etc.) cannot be implemented
 # directly in flavorization files. See scripted_triggers/00_knight_triggers.txt for
 # trigger-based knight logic. These flavorizations work based on domicile types and governments.
+# Flags are set via on_action (see common/on_action/00_knight_on_actions.txt)
+
+# Lowborn Knight - Sergeant (highest priority for lowborn knights)
+flavor_knight_sergeant = {
+	type = character
+	gender = male
+	priority = 70
+	flag = knight_sergeant_flag
+	
+	flavourization_rules = {
+		top_liege = no
+	}
+}
+
+flavor_knight_sergeant_female = {
+	type = character
+	gender = female
+	priority = 70
+	flag = knight_sergeant_flag
+	
+	flavourization_rules = {
+		top_liege = no
+	}
+}
+
+# Noble Unlanded Knight - Master (male)
+flavor_knight_master = {
+	type = character
+	gender = male
+	priority = 55
+	flag = knight_master_flag
+	
+	flavourization_rules = {
+		top_liege = no
+	}
+}
+
+# Noble Unlanded Knight - Mistress (female)
+flavor_knight_mistress = {
+	type = character
+	gender = female
+	priority = 55
+	flag = knight_mistress_flag
+	
+	flavourization_rules = {
+		top_liege = no
+	}
+}
 
 # Manor Holder - Male (Squire if undubbed, uses localization logic)
 # For the feudalmanor domicile type from manor mod

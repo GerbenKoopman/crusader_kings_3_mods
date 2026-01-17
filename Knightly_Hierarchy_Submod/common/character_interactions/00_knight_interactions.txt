@@ -35,6 +35,7 @@
 		}
 		scope:recipient = {
 			add_trait = trait_dubbed_knight
+			add_character_flag = dubbed_knight_flag
 			add_opinion = {
 				target = scope:actor
 				modifier = dubbed_my_knight_modifier
@@ -109,6 +110,7 @@ request_knighthood_interaction = {
 		scope:actor = {
 			add_prestige = -50
 			add_trait = trait_dubbed_knight
+			add_character_flag = dubbed_knight_flag
 		}
 		scope:recipient = {
 			add_opinion = {
