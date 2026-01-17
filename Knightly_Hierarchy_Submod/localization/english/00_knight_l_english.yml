@@ -36,12 +36,6 @@
  
  # Custom Tooltips
  can_be_knight_gender_tt: "Can serve as a combatant based on gender laws or is a shieldmaiden"
- 
- # Interaction - Train Knight
- train_master_interaction: "Train as Knight"
- train_master_interaction_desc: "Provide training to help this character develop their martial prowess."
- msg_training_prowess: "Their prowess has significantly improved through training."
- msg_training_gentry: "Their training has elevated them to Gentry status."
 
  # House Modifier
  knightly_house_modifier: "Knights of the Realm"
