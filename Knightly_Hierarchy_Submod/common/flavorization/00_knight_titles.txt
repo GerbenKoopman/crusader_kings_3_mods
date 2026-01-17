@@ -11,9 +11,7 @@ flavor_knight_sergeant = {
 	priority = 90
 	flag = knight_sergeant_flag
 	
-	flavourization_rules = {
-		top_liege = no
-	}
+	top_liege = no
 }
 
 flavor_knight_sergeant_female = {
@@ -22,9 +20,7 @@ flavor_knight_sergeant_female = {
 	priority = 90
 	flag = knight_sergeant_flag
 	
-	flavourization_rules = {
-		top_liege = no
-	}
+	top_liege = no
 }
 
 # Noble Unlanded Knight - Master (male)
@@ -34,9 +30,7 @@ flavor_knight_master = {
 	priority = 90
 	flag = knight_master_flag
 	
-	flavourization_rules = {
-		top_liege = no
-	}
+	top_liege = no
 }
 
 # Noble Unlanded Knight - Mistress (female)
@@ -46,9 +40,7 @@ flavor_knight_mistress = {
 	priority = 90
 	flag = knight_mistress_flag
 	
-	flavourization_rules = {
-		top_liege = no
-	}
+	top_liege = no
 }
 
 # Manor Holder - Male (Squire if undubbed, uses localization logic)
@@ -61,9 +53,7 @@ flavor_manorial_squire = {
 	priority = 90
 	governments = { manorial_government }
 	
-	flavourization_rules = {
-		top_liege = no
-	}
+	top_liege = no
 }
 
 # Manor Holder - Female (Squire if undubbed)
@@ -75,9 +65,7 @@ flavor_manorial_squire_female = {
 	priority = 90
 	governments = { manorial_government }
 	
-	flavourization_rules = {
-		top_liege = no
-	}
+	top_liege = no
 }
 
 #  Dubbed Knight - Male (Ser)
@@ -87,9 +75,7 @@ flavor_manorial_ser = {
 	priority = 90
 	flag = dubbed_knight_flag
 	
-	flavourization_rules = {
-		top_liege = no
-	}
+	top_liege = no
 }
 
 # Dubbed Knight - Female (Dame)
@@ -99,8 +85,6 @@ flavor_manorial_dame = {
 	priority = 90
 	flag = dubbed_knight_flag
 	
-	flavourization_rules = {
-		top_liege = no
-	}
+	top_liege = no
 }
 

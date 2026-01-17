@@ -23,7 +23,7 @@
  # Trait
  trait_dubbed_knight: "Knight"
  trait_dubbed_knight_desc: "Dubbed a knight by their liege, a warrior of recognized skill and status."
- trait_trait_dubbed_knight: "Knight"
+ trait_dubbed_knight: "Knight"
 
  # Interaction
  dub_squire_interaction: "Dub as Knight"
