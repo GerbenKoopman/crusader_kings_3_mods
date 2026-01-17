@@ -1,9 +1,19 @@
 ﻿dub_squire_interaction = {
 	category = interaction_category_vassal
-	icon = "gfx/interface/icons/council_task_types/task_manage_guards.dds" # A valid vanilla icon
 
 	is_shown = {
-		scope:actor = { is_ruler = yes }
+		scope:actor = {
+			OR = {
+				# 1. Any Duke, King, or Emperor is valid (even if unlanded)
+				tier >= tier_duchy
+				
+				# 2. Counts are ONLY valid if they actually hold land
+				AND = {
+					tier = tier_county
+					is_landed = yes
+				}
+			}
+		}
 		scope:recipient = {
 			
 			# --- RELATIONSHIP CHECK ---
@@ -54,14 +64,22 @@
 
 request_knighthood_interaction = {
 	category = interaction_category_vassal
-	icon = "gfx/interface/icons/council_task_types/task_manage_guards.dds"
 
 	is_shown = {
 		scope:actor = {
 			is_vassal_or_below_of = scope:recipient
 		}
 		scope:recipient = {
-			is_ruler = yes
+			OR = {
+				# 1. Any Duke, King, or Emperor is valid (even if unlanded)
+				tier >= tier_duchy
+				
+				# 2. Counts are ONLY valid if they actually hold land
+				AND = {
+					tier = tier_county
+					is_landed = yes
+				}
+			}
 		}
 	}
 

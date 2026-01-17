@@ -1,6 +1,5 @@
 ﻿train_master_interaction = {
     category = interaction_category_vassal
-    icon = "gfx/interface/icons/council_task_types/task_manage_guards.dds"
     
     is_shown = {
         scope:actor = { is_ruler = yes }
