@@ -1,3 +1,3 @@
-name="Knightly Hierarchy Submod"
+name="Knight's Fee"
 version="1.0"
-path="mod/Knightly_Hierarchy_Submod"
+path="mod/knights_fee"
