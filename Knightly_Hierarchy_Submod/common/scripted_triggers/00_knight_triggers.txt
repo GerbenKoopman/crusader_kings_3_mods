@@ -44,11 +44,5 @@ can_be_dubbed_knight_trigger = {
 
 # Checks if actor can dub knights
 can_dub_knights_trigger = {
-	OR = {
-		highest_held_title_tier >= tier_duchy
-		AND = {
-			highest_held_title_tier = tier_county
-			is_landed = yes
-		}
-	}
+	highest_held_title_tier >= tier_duchy
 }

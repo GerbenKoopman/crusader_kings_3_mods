@@ -11,8 +11,6 @@
  flavor_ser_simple: "$title_sir_knight$"
  flavor_dame_simple: "$title_madam_knight$"
  
- # Noble Family Title Names
- knight_fee_name: "Knight's Fee of [holder.GetHouse.GetName]"
 
  # Trait
  trait_dubbed_knight: "Knight"
