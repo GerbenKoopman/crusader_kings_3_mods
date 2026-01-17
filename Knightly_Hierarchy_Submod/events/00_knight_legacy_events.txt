@@ -16,13 +16,13 @@ knight_legacy_events.0001 = {
 				father = {
 					OR = {
 						has_trait = trait_dubbed_knight
-						is_manorial_lord = yes
+						is_knightly_lord = yes
 					}
 				}
 				mother = {
 					OR = {
 						has_trait = trait_dubbed_knight
-						is_manorial_lord = yes
+						is_knightly_lord = yes
 					}
 				}
 			}

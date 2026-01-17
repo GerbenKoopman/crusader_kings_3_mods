@@ -1,22 +1,8 @@
 ﻿l_english:
  # Titles
- title_sergeant: "Sergeant"
-
- title_master: "Master"
- title_mistress: "Mistress"
-
- title_squire: "Squire"
- title_squire_female: "Squire"
-
  title_ser_knight: "Ser"
  title_dame_knight: "Dame"
 
- flavor_knight_sergeant: "$title_sergeant$"
- flavor_knight_sergeant_female: "$title_sergeant$"
- flavor_knight_master: "$title_master$"
- flavor_knight_mistress: "$title_mistress$"
- flavor_manorial_squire: "$title_squire$"
- flavor_manorial_squire_female: "$title_squire_female$"
  flavor_manorial_ser: "$title_ser_knight$"
  flavor_manorial_dame: "$title_dame_knight$"
 

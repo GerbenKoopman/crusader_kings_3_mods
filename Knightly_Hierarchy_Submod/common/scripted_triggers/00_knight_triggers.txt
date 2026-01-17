@@ -1,73 +1,20 @@
-﻿is_manorial_lord = {
+﻿is_knightly_lord = {
 	is_ruler = yes
-	OR = {
-		# Check for the custom Feudal Manor (Mod 3624056113)
-		AND = {
-			has_domicile = yes
-			domicile = { 
-				is_domicile_type = feudalmanor 
-			}
-		}
-		
-		# Backup: Check for the Government Type
-		has_government = manorial_government
-	}
-}
-
-# Checks if character should be titled "Sergeant" (Lowborn, Unlanded Knight)
-is_knight_sergeant_trigger = {
-	is_knight = yes
-	is_lowborn = yes
-}
-
-# Checks if character should be titled "Master" (Noble/Gentry, Unlanded, Undubbed)
-# Applies to:
-# - Sons of knights/manorial lords
-# - Noble courtiers
-# - Noble Knights who are NOT dubbed and NOT manorial lords
-is_knight_master_trigger = {
-	is_female = no
-	is_lowborn = no
-	is_landed = no
+	has_government = manorial_government
 	
-	# Safety Checks: Ensure they aren't actually higher rank
-	is_manorial_lord = no
-	NOT = { has_trait = trait_dubbed_knight }
-
-	# Exclude landed children, who should use default titles
-	is_adult = yes
-}
-
-# Checks if character should be titled "Mistress" (Female Noble/Gentry, Unlanded, Undubbed)
-is_knight_mistress_trigger = {
-	is_female = yes
-	is_lowborn = no
-	is_landed = no
-	
-	is_manorial_lord = no
-	NOT = { has_trait = trait_dubbed_knight }
-
-	is_adult = yes
-}
-
-# Checks if character should be titled "Squire" (Has Manor, Not Dubbed)
-is_manorial_squire_trigger = {
-	is_manorial_lord = yes
-	NOT = { has_trait = trait_dubbed_knight }
-	highest_held_title_tier < tier_duchy 
 }
 
 # Checks if character should be titled "Ser" (Has Manor + Dubbed)
-is_manorial_ser_trigger = {
+is_ser_trigger = {
 	is_female = no
 	has_trait = trait_dubbed_knight
-	highest_held_title_tier < tier_duchy 
+	highest_held_title_tier < tier_county 
 }
 
 # Checks if character should be titled "Dame" (Female Has Manor + Dubbed)
-is_manorial_dame_trigger = {
+is_damee_trigger = {
 	is_female = yes
 	has_trait = trait_dubbed_knight
-	highest_held_title_tier < tier_duchy 
+	highest_held_title_tier < tier_county 
 }
 
