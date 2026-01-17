@@ -59,52 +59,52 @@ knight_grant_titular_title_effect = {
 
 # Alternative: Grant a county-tier titular title for higher-ranking knights
 # Usage: knight_grant_county_title_effect = { GRANTOR = scope:actor }
-knight_grant_county_title_effect = {
-	save_scope_as = new_knight
-	$GRANTOR$ = { save_scope_as = knight_grantor }
+# knight_grant_county_title_effect = {
+# 	save_scope_as = new_knight
+# 	$GRANTOR$ = { save_scope_as = knight_grantor }
 	
-	hidden_effect = {
-		if = {
-			limit = {
-				exists = house.house_head
-				NOT = { house.house_head = scope:new_knight }
-			}
-			if = {
-				limit = {
-					house.house_head ?= {
-						is_ai = yes
-						OR = {
-							AND = {
-								top_liege = scope:new_knight.top_liege
-								OR = {
-									is_ruler = no
-									highest_held_title_tier < scope:new_knight.highest_held_title_tier
-								}
-							}
-							NOT = { exists = liege }
-						}
-					}
-				}
-				house = { set_house_head = scope:new_knight }
-			}
-			else = {
-				create_cadet_branch = {}
-			}
-		}
-	}
+# 	hidden_effect = {
+# 		if = {
+# 			limit = {
+# 				exists = house.house_head
+# 				NOT = { house.house_head = scope:new_knight }
+# 			}
+# 			if = {
+# 				limit = {
+# 					house.house_head ?= {
+# 						is_ai = yes
+# 						OR = {
+# 							AND = {
+# 								top_liege = scope:new_knight.top_liege
+# 								OR = {
+# 									is_ruler = no
+# 									highest_held_title_tier < scope:new_knight.highest_held_title_tier
+# 								}
+# 							}
+# 							NOT = { exists = liege }
+# 						}
+# 					}
+# 				}
+# 				house = { set_house_head = scope:new_knight }
+# 			}
+# 			else = {
+# 				create_cadet_branch = {}
+# 			}
+# 		}
+# 	}
 	
-	scope:new_knight = {
-		give_noble_family_title = {
-			name = knight_fee_name
-			tier = county
-			article = DEFAULT_TITLE_NAME_ARTICLE
-			government = feudal_government
-			save_scope_as = knight_title
-		}
-	}
+# 	scope:new_knight = {
+# 		give_noble_family_title = {
+# 			name = knight_fee_name
+# 			tier = county
+# 			article = DEFAULT_TITLE_NAME_ARTICLE
+# 			government = feudal_government
+# 			save_scope_as = knight_title
+# 		}
+# 	}
 	
-	scope:knight_title.holder ?= {
-		save_scope_as = knight_holder
-		scope:knight_title = { set_coa = scope:knight_holder.house }
-	}
-}
+# 	scope:knight_title.holder ?= {
+# 		save_scope_as = knight_holder
+# 		scope:knight_title = { set_coa = scope:knight_holder.house }
+# 	}
+# }

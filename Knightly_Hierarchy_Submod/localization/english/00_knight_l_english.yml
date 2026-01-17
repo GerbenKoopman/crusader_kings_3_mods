@@ -3,10 +3,13 @@
  title_ser_knight: "Ser"
  title_dame_knight: "Dame"
 
+ title_sir_knight: "Sir"
+ title_madam_knight: "Madam"
+
  flavor_knight_ser: "$title_ser_knight$"
  flavor_knight_dame: "$title_dame_knight$"
- flavor_ser_simple: "$title_ser_knight$"
- flavor_dame_simple: "$title_dame_knight$"
+ flavor_ser_simple: "$title_sir_knight$"
+ flavor_dame_simple: "$title_madam_knight$"
  
  # Noble Family Title Names
  knight_fee_name: "Knight's Fee of [holder.GetHouse.GetName]"
@@ -19,7 +22,7 @@
  dub_squire_interaction: "Dub as Knight"
  dub_squire_interaction_desc: "Grant [recipient.GetShortUIName] the honor of knighthood, along with a knight's fee - a titular lordship recognizing their new status."
  dubbed_my_knight_modifier: "Dubbed me a Knight"
- knight_grant_title_tt: "Will be granted a Knight's Fee (titular barony)"
+ knight_grant_title_tt: "Will be granted a Knight's Fee"
  
  # Interaction - Request Knighthood
  request_knighthood_interaction: "Request Knighthood"
