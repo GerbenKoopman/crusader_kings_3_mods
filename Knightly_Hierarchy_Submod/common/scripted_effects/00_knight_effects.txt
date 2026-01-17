@@ -48,6 +48,11 @@ knight_grant_titular_title_effect = {
 			government = feudal_government
 			save_scope_as = knight_title
 		}
+		
+		# Grant income modifier for the knight's fee
+		add_character_modifier = {
+			modifier = knight_fee_income_modifier
+		}
 	}
 	
 	# Set coat of arms to match the house

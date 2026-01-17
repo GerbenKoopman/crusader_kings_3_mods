@@ -47,6 +47,10 @@
  knightly_house_modifier: "Knights of the Realm"
  desc_knightly_house_modifier: "This House has a long tradition of providing knights to the Liege. Their children are raised to the sword."
 
+ # Knight Fee Income Modifier
+ knight_fee_income_modifier: "Knight's Fee Income"
+ desc_knight_fee_income_modifier: "Income from the small estate attached to your knight's fee. The land provides a modest but steady income befitting your station."
+
  # Event Options
  knights_of_the_realm_option: "Knights of the Realm!"
  a_shame: "A shame."

@@ -1,0 +1,12 @@
+﻿####################################
+# Knightly Hierarchy Modifiers
+# Character modifiers for knight income
+####################################
+
+# Applied to knights who hold a knight's fee
+# This provides the actual income from the fee
+# Base income of 0.5 gold per month (6 gold/year) - modest income for a minor landholding
+knight_fee_income_modifier = {
+	monthly_income = 0.5
+	icon = knightly_house_modifier
+}

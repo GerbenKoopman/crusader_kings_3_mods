@@ -1,0 +1,9 @@
+﻿####################################
+# Knightly Hierarchy Script Values
+####################################
+
+# Base monthly income for a knight's fee (for reference/events)
+knight_fee_base_income = 0.5
+
+# Yearly income calculation for events (base * 12 months)
+knight_fee_yearly_income = 6
